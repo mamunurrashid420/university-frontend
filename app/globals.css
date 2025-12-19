@@ -1,5 +1,78 @@
 @import "tailwindcss";
 
+/* ============================================
+   FONT USAGE DOCUMENTATION
+   ============================================
+   
+   Based on Figma design analysis, the following fonts are used:
+   
+   TODO: Import these fonts in layout.tsx using next/font/google
+   
+   1. MERRIWEATHER (Weights: 400, 700)
+      - University title in header ("Apparel Institute of Fashion & Technology")
+      - Main headings in "About Us" section ("We are New York based university...")
+      - Headings for Undergraduate Programs section
+      - Headings for Postgraduate Programs section
+      - School names (School of Humanities, School of Engineering, School of Education, Additional Fees)
+      - Heading for 'E-Learning' card
+      - Main heading for "Access An Affordable Education & Pursue Your Passion." section
+   
+   2. FONT AWESOME 5 FREE (Weight: 900)
+      - Phone icon in header next to hotline number
+      - Note: This is an icon font, consider using react-icons or similar instead
+   
+   3. OUTFIT (Weights: 400, 500, 600, 700)
+      - Hotline number and label in header ("Hot line Number:", "088 9640 888272")
+      - Search input placeholder ("Search …")
+      - Navigation links in main menu (Home, About, Academic, Department, Admission, etc.)
+      - Section subtitles/labels ("Our Courses" heading in About Us and Tuition sections)
+      - Paragraph text in "About Us" section
+      - Button text ("Know About Us", "View Details", "Apply To Admission", "Share your Idea")
+      - Tuition details ("Full-Time Tuition (per semester): $265", etc.)
+      - Tab titles in benefits section ("Benefits", "Self Development", "Alumni", "Career")
+      - Paragraph text in "Scholarship Facilities" and "E-Learning" cards
+      - Campus Life section subtitle ("Building a vibrant community...")
+      - Event titles in "Upcoming Events" section
+      - Event month abbreviations ("Dec", "Nov", "Sep")
+      - "View All Events" link
+      - "Subscribe To Newsletter" heading
+      - "Donation helps us" heading
+   
+   4. ENCODE SANS (Weight: 600)
+      - Admission open banner text ("🎓 Admission Open | Spring 2026...")
+   
+   5. KAISEI OPTI (Weight: 700)
+      - Main heading in "Affordable tuition fees" section
+      - Heading for "Scholarship Facilities" card
+      - Main heading for "Campus Life" section (section title and card titles)
+   
+   6. POPPINS (Weights: 400, 700)
+      - Heading in "Why Choose Kingster?" section
+      - Paragraphs in "Why Choose Kingster?" section
+      - Event date day numbers ("17", "04", "11")
+      - Event times and locations ("1:00 pm - 1:00 pm", "University Grand Hall")
+      - Paragraph in "Donation helps us" section
+      - Newsletter subtitle ("Get updates to news & events")
+      - Newsletter email input placeholder ("Your Email Address")
+      - Newsletter subscribe button text ("Subscribe")
+      - "Subscribe To Newsletter" heading
+   
+   7. ROBOTO (Weights: 400, 500, 600, 700)
+      - Numbers and labels in statistics section ("94532 Students", "60483 Graduates", "35 Teachers", "1560 Courses Published")
+      - Campus Life card descriptions and sub-links ("A residential campus...", "Student Affairs")
+      - Heading for "Recognitions and Rankings at a Glance"
+      - Social section title in footer ("Social")
+      - Contact information in footer (phone, address, email)
+      - Footer navigation section titles ("Learn More", "Tickets & Booking")
+      - Footer navigation links ("Why Study at AIFT", "Contact Us", "About AIFT", "Running Students", etc.)
+      - Copyright text in footer ("© 2019 Alyeska Resor")
+   
+   8. FONT AWESOME 5 BRANDS (Weight: 400)
+      - Social media icons in footer (Facebook, Twitter, YouTube, LinkedIn, Instagram)
+      - Note: This is an icon font, consider using react-icons or similar instead
+   
+   ============================================ */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
