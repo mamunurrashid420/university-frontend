@@ -102,6 +102,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-outfit: var(--font-outfit);
+  --font-merriweather: var(--font-merriweather);
+  --font-roboto: var(--font-roboto);
   
   /* Custom Colors */
   --color-blue-shade-1: var(--blue-shade-1);

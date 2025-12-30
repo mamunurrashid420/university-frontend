@@ -69,7 +69,7 @@ export default function BlogsEventsSection() {
               </div>
               <div className="flex flex-col gap-4">
                 <h3 className="text-2xl leading-8 font-bold text-[#182847] tracking-wide">
-                  Donation helps us
+                  Freedom of Ideas
                 </h3>
                 <p className="text-[15px] leading-[26px] text-[#747474]">
                   The Campaign for the Apparel Institute of Fashion & Technology
