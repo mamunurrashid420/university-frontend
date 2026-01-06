@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function AboutSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-8 lg:px-[320px] bg-white">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[320px] bg-white overflow-x-hidden">
       <div className="max-w-[1280px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-[100px]">
           {/* Images Group: about-1 on left, about-2 and about-3 on right */}

@@ -6,64 +6,64 @@ import TuitionFeesTable from '@/components/TuitionFeesTable';
 
 export default function TuitionFeesPage() {
   return (
-    <div className="tuition-fees-page">
+    <div className="relative w-full min-h-screen bg-white">
       {/* Header Section with Blue Background */}
-      <div className="tuition-header">
+      <div className="relative w-full h-[120px] min-h-[120px] bg-[#072C5F] flex items-center justify-center overflow-hidden max-md:h-auto max-md:min-h-[120px] max-md:py-5">
         {/* Background decorative elements */}
-        <div className="header-bg-container">
-          <div className="header-bg-group header-bg-group-1">
-            <div className="bg-image-placeholder"></div>
-            <div className="bg-image-placeholder"></div>
+        <div className="absolute w-full h-[480.17px] -top-40 left-0 flex flex-row opacity-[0.08] pointer-events-none max-md:hidden">
+          <div className="w-[960.33px] h-[480.17px] relative left-0">
+            <div className="absolute w-[480.17px] h-[480.17px] left-0 top-0 bg-gradient-to-br from-[rgba(7,44,95,0.3)] to-[rgba(10,65,143,0.3)] bg-cover bg-center"></div>
+            <div className="absolute w-[480.17px] h-[480.17px] left-[480.17px] top-0 bg-gradient-to-br from-[rgba(7,44,95,0.3)] to-[rgba(10,65,143,0.3)] bg-cover bg-center"></div>
           </div>
-          <div className="header-bg-group header-bg-group-2">
-            <div className="bg-image-placeholder"></div>
-            <div className="bg-image-placeholder"></div>
+          <div className="w-[960.33px] h-[480.17px] relative left-[960.33px]">
+            <div className="absolute w-[480.17px] h-[480.17px] left-0 top-0 bg-gradient-to-br from-[rgba(7,44,95,0.3)] to-[rgba(10,65,143,0.3)] bg-cover bg-center"></div>
+            <div className="absolute w-[480.17px] h-[480.17px] left-[480.17px] top-0 bg-gradient-to-br from-[rgba(7,44,95,0.3)] to-[rgba(10,65,143,0.3)] bg-cover bg-center"></div>
           </div>
         </div>
 
         {/* Header Content */}
-        <div className="header-content">
-          <div className="header-title-section">
-            <h1 className="header-title">Tuition & Fees</h1>
-            <div className="breadcrumbs">
-              <span>Home</span>
-              <span>/</span>
-              <span>Admission</span>
-              <span>/</span>
-              <span>Tuition Fees</span>
+        <div className="relative w-full max-w-[1920px] h-full flex items-center justify-start pl-[320px] z-10 mx-auto max-[1920px]:pl-[max(20px,calc((100%-1280px)/2+20px))] max-md:pl-5 max-md:justify-center">
+          <div className="flex flex-col items-start gap-3 w-[246px] h-auto max-md:w-full max-md:items-center max-md:text-center max-md:gap-2">
+            <h1 className="w-[246px] h-auto font-['Outfit'] font-medium text-[32px] leading-10 text-white m-0 max-md:text-2xl max-md:w-full max-md:leading-8">Tuition & Fees</h1>
+            <div className="flex flex-row items-center gap-2 w-[246px] h-auto max-md:w-full max-md:justify-center max-md:flex-wrap">
+              <span className="font-['Outfit'] font-medium text-base leading-5 text-white max-md:text-sm">Home</span>
+              <span className="font-['Outfit'] font-medium text-base leading-5 text-white max-md:text-sm">/</span>
+              <span className="font-['Outfit'] font-medium text-base leading-5 text-white max-md:text-sm">Admission</span>
+              <span className="font-['Outfit'] font-medium text-base leading-5 text-white max-md:text-sm">/</span>
+              <span className="font-['Outfit'] font-medium text-base leading-5 text-white max-md:text-sm">Tuition Fees</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Announcement Section */}
-      <div className="announcement-section">
-        <div className="announcement-header">
-          <Link href="/admission" className="back-button">
-            <ArrowLeft className="back-icon" />
-            <span>Back</span>
+      <div className="relative w-full max-w-[930px] mt-10 mx-auto flex flex-col items-center gap-4 z-10 px-5 max-[1920px]:w-[90%] max-md:mt-5 max-md:w-[95%] max-md:px-4">
+        <div className="w-full flex flex-row items-center gap-4 max-md:flex-col max-md:items-start max-md:gap-3">
+          <Link href="/admission" className="flex flex-row items-center gap-1 no-underline shrink-0 hover:opacity-70 max-md:self-start">
+            <ArrowLeft className="w-5 h-5 -rotate-90 text-[#4A5568] shrink-0" />
+            <span className="font-['Outfit'] font-normal text-base leading-5 text-[#4A5568] max-md:text-sm">Back</span>
           </Link>
-          <h2 className="announcement-title">
+          <h2 className="flex-1 h-auto min-h-8 font-['Outfit'] font-semibold text-2xl leading-8 tracking-[0.04em] text-black text-center m-0 max-[1920px]:w-full max-[1920px]:text-xl max-md:text-left max-md:w-full max-md:text-lg max-md:leading-[1.4] max-md:tracking-normal">
             Admission Open for Education and Admission Fair Spring 2026 (January - April)
           </h2>
         </div>
-        <div className="announcement-content">
-          <p className="announcement-text">
+        <div className="flex flex-col items-center gap-3 w-full max-w-[413px] h-auto min-h-12 max-[1920px]:w-full max-md:max-w-full">
+          <p className="w-full h-auto min-h-5 font-['Outfit'] font-normal text-base leading-5 text-black text-center m-0 max-md:text-sm">
             Please Contact the Admission Office for Admission Details.
           </p>
-          <div className="contact-info">
-            <div className="contact-item">
-              <Mail className="contact-icon" />
-              <div className="contact-details">
-                <span className="contact-label">Mail:</span>
-                <span className="contact-value">info@aift.edu.bd</span>
+          <div className="flex flex-row items-center gap-6 w-auto h-auto max-[1920px]:flex-row max-[1920px]:flex-wrap max-[1920px]:justify-center max-[1920px]:gap-3 max-md:flex-col max-md:items-center max-md:gap-2 max-md:w-full">
+            <div className="flex flex-row items-center gap-1 max-md:justify-center">
+              <Mail className="w-4 h-4 text-[#666666] shrink-0" />
+              <div className="flex flex-row items-center gap-0.5 flex-wrap">
+                <span className="font-['Outfit'] font-normal text-[11px] leading-4 text-[#666666]">Mail:</span>
+                <span className="font-['Outfit'] font-normal text-[11px] leading-4 text-[#666666] break-all">info@aift.edu.bd</span>
               </div>
             </div>
-            <div className="contact-item">
-              <Phone className="contact-icon" />
-              <div className="contact-details">
-                <span className="contact-label">Hotline:</span>
-                <span className="contact-value">088 9640 888272</span>
+            <div className="flex flex-row items-center gap-1 max-md:justify-center">
+              <Phone className="w-4 h-4 text-[#666666] shrink-0" />
+              <div className="flex flex-row items-center gap-0.5 flex-wrap">
+                <span className="font-['Outfit'] font-normal text-[11px] leading-4 text-[#666666]">Hotline:</span>
+                <span className="font-['Outfit'] font-normal text-[11px] leading-4 text-[#666666]">088 9640 888272</span>
               </div>
             </div>
           </div>
@@ -71,404 +71,9 @@ export default function TuitionFeesPage() {
       </div>
 
       {/* Tuition Fees Table */}
-      <div className="tuition-table-container">
+      <div className="relative w-full max-w-[1920px] mt-10 mx-auto flex justify-center px-5 max-md:mt-5 max-md:px-2 max-sm:px-1">
         <TuitionFeesTable />
       </div>
-
-      <style jsx>{`
-        .tuition-fees-page {
-          position: relative;
-          width: 100%;
-          min-height: 100vh;
-          background: #ffffff;
-        }
-
-        /* Header Section */
-        .tuition-header {
-          position: relative;
-          width: 100%;
-          height: 120px;
-          background: #072C5F;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-        }
-
-        /* Background decorative elements */
-        .header-bg-container {
-          position: absolute;
-          width: 100%;
-          height: 480.17px;
-          top: -160px;
-          left: 0;
-          display: flex;
-          flex-direction: row;
-          opacity: 0.08;
-          pointer-events: none;
-        }
-
-        .header-bg-group {
-          width: 960.33px;
-          height: 480.17px;
-          position: relative;
-        }
-
-        .header-bg-group-1 {
-          left: 0;
-        }
-
-        .header-bg-group-2 {
-          left: 960.33px;
-        }
-
-        .bg-image-placeholder {
-          position: absolute;
-          width: 480.17px;
-          height: 480.17px;
-          background: linear-gradient(135deg, rgba(7, 44, 95, 0.3) 0%, rgba(10, 65, 143, 0.3) 100%);
-          background-size: cover;
-          background-position: center;
-        }
-
-        .header-bg-group-1 .bg-image-placeholder:first-child {
-          left: 0;
-          top: 0;
-        }
-
-        .header-bg-group-1 .bg-image-placeholder:last-child {
-          left: 480.17px;
-          top: 0;
-        }
-
-        .header-bg-group-2 .bg-image-placeholder:first-child {
-          left: 0;
-          top: 0;
-        }
-
-        .header-bg-group-2 .bg-image-placeholder:last-child {
-          left: 480.17px;
-          top: 0;
-        }
-
-        /* Header Content */
-        .header-content {
-          position: relative;
-          width: 100%;
-          max-width: 1920px;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          padding-left: 320px;
-          z-index: 1;
-          margin: 0 auto;
-        }
-
-        .header-title-section {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
-          width: 246px;
-          height: 72px;
-        }
-
-        .header-title {
-          width: 246px;
-          height: 40px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 32px;
-          line-height: 40px;
-          color: #FFFFFF;
-          margin: 0;
-        }
-
-        .breadcrumbs {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 8px;
-          width: 246px;
-          height: 20px;
-        }
-
-        .breadcrumbs span {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-          color: #FFFFFF !important;
-        }
-
-        .breadcrumbs a {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-          color: #FFFFFF !important;
-          text-decoration: none;
-          transition: opacity 0.2s;
-        }
-
-        .breadcrumbs a:hover {
-          opacity: 0.8;
-        }
-
-        /* Announcement Header */
-        .announcement-header {
-          width: 100%;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 16px;
-        }
-
-        /* Back Button */
-        .back-button {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 4px;
-          text-decoration: none;
-          flex-shrink: 0;
-        }
-
-        .back-button:hover {
-          opacity: 0.7;
-        }
-
-        .back-icon {
-          width: 20px;
-          height: 20px;
-          transform: rotate(-90deg);
-          color: #4A5568;
-          flex-shrink: 0;
-        }
-
-        .back-button span {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #4A5568;
-        }
-
-        /* Announcement Section */
-        .announcement-section {
-          position: relative;
-          width: 100%;
-          max-width: 930px;
-          margin: 40px auto 0;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 16px;
-          z-index: 10;
-          padding: 0 20px;
-        }
-
-        .announcement-title {
-          flex: 1;
-          height: auto;
-          min-height: 32px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          line-height: 32px;
-          letter-spacing: 0.04em;
-          color: #000000;
-          text-align: center;
-          margin: 0;
-        }
-
-        .announcement-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 12px;
-          width: 100%;
-          max-width: 413px;
-          height: auto;
-          min-height: 48px;
-        }
-
-        .announcement-text {
-          width: 100%;
-          height: auto;
-          min-height: 20px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #000000;
-          text-align: center;
-          margin: 0;
-        }
-
-        .contact-info {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 24px;
-          width: 301px;
-          height: 16px;
-        }
-
-        .contact-item {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 4px;
-        }
-
-        .contact-icon {
-          width: 16px;
-          height: 16px;
-          color: #666666;
-          flex-shrink: 0;
-        }
-
-        .contact-details {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 2px;
-        }
-
-        .contact-label {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 11px;
-          line-height: 16px;
-          color: #666666;
-        }
-
-        .contact-value {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 11px;
-          line-height: 16px;
-          color: #666666;
-        }
-
-        /* Tuition Table Container */
-        .tuition-table-container {
-          position: relative;
-          width: 100%;
-          max-width: 1920px;
-          margin: 40px auto 0;
-          display: flex;
-          justify-content: center;
-          padding: 0 20px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1920px) {
-          .header-content {
-            padding-left: max(20px, calc((100% - 1280px) / 2 + 20px));
-          }
-
-          .announcement-section {
-            width: 90%;
-            max-width: 930px;
-          }
-
-          .announcement-title {
-            width: 100%;
-            font-size: 20px;
-          }
-
-          .announcement-content {
-            width: 100%;
-            max-width: 413px;
-          }
-
-          .contact-info {
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            width: auto;
-            height: auto;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .tuition-header {
-            height: auto;
-            min-height: 120px;
-            padding: 20px;
-          }
-
-          .header-content {
-            padding-left: 0;
-            justify-content: center;
-          }
-
-          .header-title-section {
-            width: 100%;
-            align-items: center;
-            text-align: center;
-          }
-
-          .header-title {
-            font-size: 24px;
-            width: 100%;
-          }
-
-          .breadcrumbs {
-            width: 100%;
-            justify-content: center;
-            flex-wrap: wrap;
-          }
-
-          .header-content {
-            padding-left: 20px;
-          }
-
-          .announcement-section {
-            margin: 20px auto 0;
-            width: 90%;
-          }
-
-          .announcement-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-          }
-
-          .back-button {
-            align-self: flex-start;
-          }
-
-          .announcement-title {
-            text-align: left;
-            width: 100%;
-            font-size: 18px;
-            line-height: 1.4;
-          }
-
-          .announcement-title {
-            font-size: 18px;
-            line-height: 1.4;
-          }
-
-          .tuition-table-container {
-            margin-top: 40px;
-            padding: 0 10px;
-          }
-        }
-      `}</style>
     </div>
   );
 }

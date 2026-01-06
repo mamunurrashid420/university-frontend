@@ -28,18 +28,18 @@ export default function AdmissionForm() {
   };
 
   return (
-    <div className="admission-form-container">
+    <div className="w-full flex justify-center p-5 max-md:p-3 max-sm:p-2">
       {/* Main Form Container */}
-      <div className="admission-form-wrapper">
+      <div className="relative w-[880px] min-h-[996px] bg-white border border-[#CCCCCC] drop-shadow-[0px_0px_8px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden max-[920px]:w-full max-[920px]:max-w-[880px] max-md:rounded-xl max-sm:rounded-lg">
         {/* Header Section */}
-        <div className="admission-header">
+        <div className="relative w-full h-[100px] min-h-[100px] bg-gradient-to-br from-[#0A418F] to-[#072C5F] rounded-t-2xl flex items-center justify-between px-4 overflow-hidden max-[920px]:flex-col max-[920px]:h-auto max-[920px]:min-h-auto max-[920px]:p-4 max-[920px]:gap-4 max-md:rounded-t-xl max-sm:rounded-t-lg max-sm:px-3 max-sm:py-4">
           {/* Background decorative elements */}
-          <div className="header-bg-group-left"></div>
-          <div className="header-bg-group-right"></div>
+          <div className="absolute w-[315.14px] h-[297.14px] top-1/2 -translate-y-1/2 left-[-60px] opacity-[0.12] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] pointer-events-none max-md:hidden before:content-[''] before:absolute before:w-[210.11px] before:h-[210.11px] before:bg-[#0A418F] before:rotate-[-45deg] before:left-[-42px] before:top-[-99px] after:content-[''] after:absolute after:w-[210.11px] after:h-[210.11px] after:bg-[#072C5F] after:rotate-[-45deg] after:left-[-60px] after:top-[-99px]"></div>
+          <div className="absolute w-[315.14px] h-[297.14px] top-1/2 -translate-y-1/2 -scale-x-100 right-[-60px] opacity-[0.12] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] pointer-events-none max-md:hidden before:content-[''] before:absolute before:w-[210.11px] before:h-[210.11px] before:bg-[#0A418F] before:rotate-[-45deg] before:left-[-42px] before:top-[-99px] after:content-[''] after:absolute after:w-[210.11px] after:h-[210.11px] after:bg-[#072C5F] after:rotate-[-45deg] after:left-[-60px] after:top-[-99px]"></div>
           
           {/* Logo and Institute Name */}
-          <div className="header-logo-section">
-            <div className="header-logo-image">
+          <div className="flex flex-row items-center gap-3 z-10 max-md:gap-2 max-sm:flex-col max-sm:items-center max-sm:text-center">
+            <div className="w-12 h-12 rounded-[40px] overflow-hidden shrink-0 max-sm:w-10 max-sm:h-10">
               <Image
                 src="/images/logo/logo.jpg"
                 alt="AIFT Logo"
@@ -48,149 +48,145 @@ export default function AdmissionForm() {
                 className="rounded-full"
               />
             </div>
-            <div className="header-institute-name">
+            <div className="w-[124px] h-auto font-['Merriweather'] font-bold text-sm leading-5 text-white flex items-center max-md:text-xs max-sm:w-full max-sm:justify-center max-sm:text-center">
               Apparel Institute of Fashion & Technology
             </div>
           </div>
 
           {/* Admission Open Section */}
-          <div className="header-admission-open">
-            <div className="admission-open-text">ADMISSION OPEN</div>
-            <div className="admission-semester">Spring 2026</div>
+          <div className="flex flex-col items-center gap-[1px] z-10 max-[920px]:order-[-1] max-md:gap-0.5">
+            <div className="w-auto max-w-[240px] h-auto font-['Outfit'] font-bold text-[28px] leading-10 text-[#27A239] text-center max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7">ADMISSION OPEN</div>
+            <div className="w-auto max-w-[240px] h-auto font-['Merriweather'] italic font-bold text-xl leading-7 text-center text-[#EE5E11] max-md:text-lg max-sm:text-base">Spring 2026</div>
           </div>
 
           {/* Scholarship Section */}
-          <div className="header-scholarship">
-            <div className="scholarship-top">
-              <span className="scholarship-upto">Upto</span>
-              <span className="scholarship-percent">100%</span>
+          <div className="flex flex-col items-center z-10 max-md:items-center">
+            <div className="flex flex-row items-center gap-[17px] max-md:gap-3">
+              <span className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm">Upto</span>
+              <span className="w-auto h-auto font-['Outfit'] font-semibold text-2xl leading-8 text-[#EE5E11] max-md:text-xl">100%</span>
             </div>
-            <div className="scholarship-label">SCHOLARSHIP</div>
-            <div className="scholarship-phone">+880XXX XXX</div>
+            <div className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm">SCHOLARSHIP</div>
+            <div className="w-auto h-auto font-['Outfit'] font-semibold text-sm leading-6 text-center text-[#D2AF3C] max-md:text-xs">+880XXX XXX</div>
           </div>
         </div>
 
         {/* Form Content */}
-        <div className="admission-form-content">
+        <div className="relative flex flex-col items-center gap-6 p-5 pt-[124px] max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
           {/* Back Link */}
-          <a href="/" className="back-link">
-            <ChevronLeft className="back-icon" />
-            <span>Back</span>
+          <a href="/" className="absolute left-[22px] -top-[14px] flex flex-row items-center gap-1 cursor-pointer no-underline z-10 w-auto h-auto hover:opacity-70 max-md:left-4 max-md:-top-3 max-sm:left-3 max-sm:-top-2">
+            <ChevronLeft className="w-5 h-5 text-[#4A5568] shrink-0 max-sm:w-4 max-sm:h-4" />
+            <span className="w-auto h-auto font-['Outfit'] font-normal text-base leading-5 text-[#4A5568] max-sm:text-sm">Back</span>
           </a>
 
           {/* Form Title */}
-          <div className="form-title-section">
-            <h1 className="form-title">Online Admission Information Form</h1>
+          <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3">
+            <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5">Online Admission Information Form</h1>
             
             {/* Action Buttons */}
-            <div className="form-action-buttons">
-              <button className="action-btn action-btn-blue">
-                <span>Tuition Fee</span>
-                <span>Calculator</span>
+            <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
+              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[203px] border border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-[1.2]">Tuition Fee</span>
+                <span className="block leading-[1.2]">Calculator</span>
               </button>
-              <button className="action-btn action-btn-green">
-                <span>Check Tuition</span>
-                <span>Fees</span>
+              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[183px] border border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-[1.2]">Check Tuition</span>
+                <span className="block leading-[1.2]">Fees</span>
               </button>
-              <button className="action-btn action-btn-orange">
-                <span>Scholarship</span>
-                <span>Opportunities</span>
+              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[233px] border border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-[1.2]">Scholarship</span>
+                <span className="block leading-[1.2]">Opportunities</span>
               </button>
             </div>
           </div>
 
           {/* Basic Information Section */}
-          <div className="form-section">
-            <h2 className="section-title">Basic Information</h2>
+          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3">
+            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">Basic Information</h2>
             
-            <div className="form-fields">
+            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4">
               {/* Row 1: Admission Year & Semester */}
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="field-label">
-                    Admission Year<span className="required-asterisk">*</span>
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Admission Year<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
-                  <div className="select-wrapper">
+                  <div className="relative w-full block">
                     <select
                       name="admissionYear"
                       value={formData.admissionYear}
                       onChange={handleChange}
-                      className="form-select"
+                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
                     >
                       <option value="">Select option</option>
                       <option value="2026">2026</option>
                       <option value="2027">2027</option>
                     </select>
-                    {/* <ChevronDown className="select-chevron" /> */}
                   </div>
                 </div>
 
-                <div className="form-field">
-                  <label className="field-label">
-                    Semester<span className="required-asterisk">*</span>
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Semester<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
-                  <div className="select-wrapper">
+                  <div className="relative w-full block">
                     <select
                       name="semester"
                       value={formData.semester}
                       onChange={handleChange}
-                      className="form-select"
+                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
                     >
                       <option value="">Select option</option>
                       <option value="spring">Spring</option>
                       <option value="fall">Fall</option>
                     </select>
-                    {/* <ChevronDown className="select-chevron" /> */}
                   </div>
                 </div>
               </div>
 
               {/* Row 2: Department & Program */}
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="field-label">
-                    Department<span className="required-asterisk">*</span>
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Department<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
-                  <div className="select-wrapper">
+                  <div className="relative w-full block">
                     <select
                       name="department"
                       value={formData.department}
                       onChange={handleChange}
-                      className="form-select"
+                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
                     >
                       <option value="">Select option</option>
                       <option value="fashion">Fashion Design</option>
                       <option value="technology">Technology</option>
                     </select>
-                    {/* <ChevronDown className="select-chevron" /> */}
                   </div>
                 </div>
 
-                <div className="form-field">
-                  <label className="field-label">
-                    Program<span className="required-asterisk">*</span>
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Program<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
-                  <div className="select-wrapper">
+                  <div className="relative w-full block">
                     <select
                       name="program"
                       value={formData.program}
                       onChange={handleChange}
-                      className="form-select"
+                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
                     >
                       <option value="">Select option</option>
                       <option value="bachelor">Bachelor</option>
                       <option value="master">Master</option>
                     </select>
-                    {/* <ChevronDown className="select-chevron" /> */}
                   </div>
                 </div>
               </div>
 
               {/* Row 3: Full Name & Phone Number */}
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="field-label">
-                    Full Name<span className="required-asterisk">*</span>
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Full Name<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="text"
@@ -198,13 +194,13 @@ export default function AdmissionForm() {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
-                <div className="form-field">
-                  <label className="field-label">
-                    Phone Number<span className="required-asterisk">*</span>
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Phone Number<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="tel"
@@ -212,16 +208,16 @@ export default function AdmissionForm() {
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
 
               {/* Row 4: Email & How did you hear about us */}
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="field-label">
-                    Email<span className="required-asterisk">*</span>
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Email<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="email"
@@ -229,35 +225,34 @@ export default function AdmissionForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
-                <div className="form-field">
-                  <label className="field-label">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     How did you hear about us?
                   </label>
-                  <div className="select-wrapper">
+                  <div className="relative w-full block">
                     <select
                       name="hearAboutUs"
                       value={formData.hearAboutUs}
                       onChange={handleChange}
-                      className="form-select"
+                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
                     >
                       <option value="">Select option</option>
                       <option value="website">Website</option>
                       <option value="social-media">Social Media</option>
                       <option value="friend">Friend</option>
                     </select>
-                    {/* <ChevronDown className="select-chevron" /> */}
                   </div>
                 </div>
               </div>
 
               {/* Row 5: Who assisted you */}
-              <div className="form-row">
-                <div className="form-field form-field-full">
-                  <label className="field-label">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 w-full">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Who assisted you for your admission?
                   </label>
                   <input
@@ -266,7 +261,7 @@ export default function AdmissionForm() {
                     value={formData.assistedBy}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
@@ -274,14 +269,14 @@ export default function AdmissionForm() {
           </div>
 
           {/* Academic Result Information Section */}
-          <div className="form-section">
-            <h2 className="section-title">Academic Result Information</h2>
+          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3">
+            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">Academic Result Information</h2>
             
-            <div className="form-fields">
-              <div className="form-row">
-                <div className="form-field form-field-third">
-                  <label className="field-label">
-                    SSC/Equivalent<span className="required-asterisk">*</span>
+            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    SSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="text"
@@ -289,13 +284,13 @@ export default function AdmissionForm() {
                     value={formData.ssc}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
-                <div className="form-field form-field-third">
-                  <label className="field-label">
-                    HSC/Equivalent<span className="required-asterisk">*</span>
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    HSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="text"
@@ -303,13 +298,13 @@ export default function AdmissionForm() {
                     value={formData.hsc}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
-                <div className="form-field form-field-third">
-                  <label className="field-label">
-                    Honors/Equivalent/Other<span className="required-asterisk">*</span>
+                <div className="flex flex-col items-start gap-2 flex-1">
+                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                    Honors/Equivalent/Other<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </label>
                   <input
                     type="text"
@@ -317,7 +312,7 @@ export default function AdmissionForm() {
                     value={formData.honors}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="form-input"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
@@ -325,545 +320,13 @@ export default function AdmissionForm() {
           </div>
 
           {/* Submit Button */}
-          <div className="form-submit-section">
-            <button className="submit-button">
+          <div className="flex flex-row justify-center items-center w-full mt-5 max-md:mt-4 max-sm:mt-3">
+            <button className="w-[258px] h-12 py-3 px-8 bg-gradient-to-r from-[#0056EC] to-[#01AD9F] rounded-lg border-none font-['Outfit'] font-medium text-xl leading-6 text-white cursor-pointer transition-opacity hover:opacity-90 max-md:w-full max-md:max-w-[258px] max-md:text-lg max-sm:text-base max-sm:h-11 max-sm:py-2.5 max-sm:px-6">
               Tuition Fee Calculator
             </button>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .admission-form-container {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          padding: 20px;
-        }
-
-        .admission-form-wrapper {
-          position: relative;
-          width: 880px;
-          min-height: 996px;
-          background: white;
-          border: 1px solid #CCCCCC;
-          filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.25));
-          border-radius: 16px;
-          overflow: hidden;
-        }
-
-        /* Header Section */
-        .admission-header {
-          position: relative;
-          width: 100%;
-          height: 100px;
-          background: linear-gradient(135deg, #0A418F 0%, #072C5F 100%);
-          border-radius: 16px 16px 0px 0px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 16px;
-          overflow: hidden;
-        }
-
-        .header-bg-group-left,
-        .header-bg-group-right {
-          position: absolute;
-          width: 315.14px;
-          height: 297.14px;
-          top: 50%;
-          transform: translateY(-50%);
-          opacity: 0.12;
-          filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-          pointer-events: none;
-        }
-
-        .header-bg-group-left {
-          left: -60px;
-        }
-
-        .header-bg-group-left::before,
-        .header-bg-group-left::after {
-          content: '';
-          position: absolute;
-          width: 210.11px;
-          height: 210.11px;
-          background: #0A418F;
-          transform: rotate(-45deg);
-        }
-
-        .header-bg-group-left::before {
-          left: -42px;
-          top: -99px;
-        }
-
-        .header-bg-group-left::after {
-          left: -60px;
-          top: -99px;
-          background: #072C5F;
-        }
-
-        .header-bg-group-right {
-          right: -60px;
-          transform: translateY(-50%) scaleX(-1);
-        }
-
-        .header-bg-group-right::before,
-        .header-bg-group-right::after {
-          content: '';
-          position: absolute;
-          width: 210.11px;
-          height: 210.11px;
-          background: #0A418F;
-          transform: rotate(-45deg);
-        }
-
-        .header-bg-group-right::before {
-          left: -42px;
-          top: -99px;
-        }
-
-        .header-bg-group-right::after {
-          left: -60px;
-          top: -99px;
-          background: #072C5F;
-        }
-
-        .header-logo-section {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 12px;
-          z-index: 1;
-        }
-
-        .header-logo-image {
-          width: 48px;
-          height: 48px;
-          border-radius: 40px;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-
-        .header-institute-name {
-          width: 124px;
-          height: 60px;
-          font-family: 'Merriweather', serif;
-          font-style: normal;
-          font-weight: 700;
-          font-size: 14px;
-          line-height: 20px;
-          color: #FFFFFF;
-          display: flex;
-          align-items: center;
-        }
-
-        .header-admission-open {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1px;
-          z-index: 1;
-        }
-
-        .admission-open-text {
-          width: 240px;
-          height: 40px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 700;
-          font-size: 28px;
-          line-height: 40px;
-          color: #27A239;
-          text-align: center;
-        }
-
-        .admission-semester {
-          width: 240px;
-          height: 28px;
-          font-family: 'Merriweather', serif;
-          font-style: italic;
-          font-weight: 700;
-          font-size: 20px;
-          line-height: 28px;
-          text-align: center;
-          color: #EE5E11;
-        }
-
-        .header-scholarship {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          z-index: 1;
-        }
-
-        .scholarship-top {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 17px;
-        }
-
-        .scholarship-upto {
-          width: 36px;
-          height: 20px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 20px;
-          color: #FFFFFF;
-        }
-
-        .scholarship-percent {
-          width: 57px;
-          height: 32px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          line-height: 32px;
-          color: #EE5E11;
-        }
-
-        .scholarship-label {
-          width: 110px;
-          height: 20px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 16px;
-          line-height: 20px;
-          color: #FFFFFF;
-        }
-
-        .scholarship-phone {
-          width: 110px;
-          height: 24px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 24px;
-          text-align: center;
-          color: #D2AF3C;
-        }
-
-        /* Form Content */
-        .admission-form-content {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 24px;
-          padding: 20px;
-          padding-top: 124px;
-        }
-
-        .back-link {
-          position: absolute;
-          left: 22px;
-          top: -14px;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 4px;
-          cursor: pointer;
-          text-decoration: none;
-          z-index: 10;
-          width: 60px;
-          height: 20px;
-        }
-
-        .back-link:hover {
-          opacity: 0.7;
-        }
-
-        .back-icon {
-          width: 20px;
-          height: 20px;
-          color: #4A5568;
-          flex-shrink: 0;
-        }
-
-        .back-link span {
-          width: 36px;
-          height: 20px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #4A5568;
-        }
-
-        .form-title-section {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 20px;
-          width: 100%;
-          max-width: 659px;
-        }
-
-        .form-title {
-          width: 100%;
-          height: 28px;
-          font-family: 'Merriweather', serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 20px;
-          line-height: 28px;
-          text-align: center;
-          color: #1E2021;
-        }
-
-        .form-action-buttons {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 20px;
-          width: 100%;
-        }
-
-        .action-btn {
-          box-sizing: border-box;
-          min-height: 32px;
-          border-radius: 6px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-          padding: 6px 24px;
-          background: white;
-          cursor: pointer;
-          transition: all 0.2s;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          white-space: nowrap;
-        }
-
-        .action-btn span {
-          display: block;
-          line-height: 1.2;
-        }
-
-        .action-btn-blue {
-          width: 203px;
-          border: 1px solid #116DEE;
-          color: #116DEE;
-        }
-
-        .action-btn-green {
-          width: 183px;
-          border: 1px solid #27A239;
-          color: #27A239;
-        }
-
-        .action-btn-orange {
-          width: 233px;
-          border: 1px solid #EE5E11;
-          color: #EE5E11;
-        }
-
-        .action-btn:hover {
-          opacity: 0.8;
-        }
-
-        /* Form Sections */
-        .form-section {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 20px;
-          width: 100%;
-        }
-
-        .section-title {
-          width: 100%;
-          height: 32px;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 20px;
-          line-height: 32px;
-          color: #4A5568;
-          display: flex;
-          align-items: center;
-        }
-
-        .form-fields {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 24px;
-          width: 100%;
-        }
-
-        .form-row {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 24px;
-          width: 100%;
-        }
-
-        .form-field {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 8px;
-          flex: 1;
-        }
-
-        .form-field-full {
-          width: 100%;
-        }
-
-        .form-field-third {
-          flex: 1;
-        }
-
-        .field-label {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 20px;
-          color: #4A5568;
-        }
-
-        .required-asterisk {
-          width: 9px;
-          height: 19px;
-          font-family: 'Inter', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 19px;
-          color: #FE6675;
-          margin-left: 2px;
-        }
-
-        .select-wrapper {
-          position: relative;
-          width: 100%;
-          display: block;
-        }
-
-        .form-select,
-        .form-input {
-          box-sizing: border-box;
-          width: 100%;
-          height: 44px;
-          padding: 12px 16px;
-          border: 1px solid #E5E7EB;
-          border-radius: 4px;
-          font-family: 'Roboto', sans-serif;
-          font-style: normal;
-          font-weight: 400;
-          font-size: 14px;
-          line-height: 20px;
-          color: #1E2021;
-          background: white;
-        }
-
-        .form-select {
-          appearance: none;
-          padding-right: 40px;
-        }
-
-        .form-select:focus,
-        .form-input:focus {
-          outline: none;
-          border-color: #116DEE;
-        }
-
-        .form-input::placeholder,
-        .form-select option:first-child {
-          color: #ADB3BD;
-        }
-
-        .select-chevron {
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 20px;
-          height: 20px;
-          color: #ADB3BD;
-          pointer-events: none;
-        }
-
-        /* Submit Button */
-        .form-submit-section {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          margin-top: 20px;
-        }
-
-        .submit-button {
-          width: 258px;
-          height: 48px;
-          padding: 12px 32px;
-          background: linear-gradient(100.82deg, #0056EC 5.54%, #01AD9F 94.5%);
-          border-radius: 8px;
-          border: none;
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 24px;
-          color: #FFFFFF;
-          cursor: pointer;
-          transition: opacity 0.2s;
-        }
-
-        .submit-button:hover {
-          opacity: 0.9;
-        }
-
-        @media (max-width: 920px) {
-          .admission-form-wrapper {
-            width: 100%;
-            max-width: 880px;
-          }
-
-          .admission-header {
-            flex-direction: column;
-            height: auto;
-            padding: 16px;
-            gap: 16px;
-          }
-
-          .header-admission-open {
-            order: -1;
-          }
-
-          .form-row {
-            flex-direction: column;
-          }
-
-          .form-action-buttons {
-            flex-direction: column;
-            width: 100%;
-          }
-
-          .action-btn {
-            width: 100%;
-          }
-        }
-      `}</style>
     </div>
   );
 }

@@ -91,7 +91,7 @@ export default function Header() {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] xl:w-[468px] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100%-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
             <input
               type="text"
               placeholder="Search …"

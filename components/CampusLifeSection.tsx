@@ -28,7 +28,7 @@ const campusItems = [
 
 export default function CampusLifeSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-8 lg:px-[371px] bg-white">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[371px] bg-white overflow-x-hidden">
       <div className="max-w-[1179px] mx-auto">
         {/* Header */}
         <div className="text-center mb-6 md:mb-8">

@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function ProgramsSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[108px] px-4 md:px-8 lg:px-[320px] bg-white">
+    <section className="w-full py-12 md:py-20 lg:py-[108px] px-4 md:px-6 lg:px-[320px] bg-white overflow-x-hidden">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-[54px]">
         {/* Left: Tuition Info */}
         <div className="flex-1 max-w-full lg:max-w-[386px]">

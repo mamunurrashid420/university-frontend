@@ -4,10 +4,10 @@ import Image from 'next/image';
 
 export default function FeaturesSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-8 lg:px-[316px] bg-white">
-      <div className="max-w-[1290px] mx-auto flex flex-col lg:flex-row">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[316px] bg-white overflow-x-hidden">
+      <div className="max-w-[1290px] mx-auto flex flex-col lg:flex-row gap-4 md:gap-6">
         {/* Scholarship Card */}
-        <div className="w-[322.5px] flex flex-col">
+        <div className="w-full lg:w-[322.5px] flex flex-col flex-shrink-0">
           <div className="relative h-[285px] bg-white rounded overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#F1F7FF] -z-10" />
             <div className="absolute -left-[198px] -top-[222px] w-[497px] h-[497px] bg-gradient-to-br from-white via-white to-[#F1F7FF] rounded-full" />
@@ -58,7 +58,7 @@ export default function FeaturesSection() {
         </div>
 
         {/* E-Learning Card */}
-        <div className="w-[322.5px] flex flex-col">
+        <div className="w-full lg:w-[322.5px] flex flex-col flex-shrink-0">
           <div className="relative h-[285px]">
             <Image
               src="/images/events/elearning.png"
@@ -126,8 +126,8 @@ export default function FeaturesSection() {
             }}
           />
           <div className="absolute inset-0 bg-[#1D3F6B] opacity-40" />
-          <div className="absolute inset-0 flex flex-col justify-center items-start p-[100px]">
-            <h3 className="text-[40.5px] leading-[52px] font-bold text-white mb-8 font-serif max-w-[427px]">
+          <div className="absolute inset-0 flex flex-col justify-center items-start p-6 md:p-12 lg:p-[100px]">
+            <h3 className="text-2xl md:text-3xl lg:text-[40.5px] leading-tight md:leading-[52px] font-bold text-white mb-8 font-serif max-w-[427px]">
               Access An Affordable Education & Pursue Your Passion.
             </h3>
             <button className="px-[35px] py-4 bg-[#116DEE] rounded text-white text-base font-semibold flex items-center hover:bg-[#0A418F] transition-colors">

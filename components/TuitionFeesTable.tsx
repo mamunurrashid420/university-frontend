@@ -532,51 +532,51 @@ const getSchoolColor = (schoolName: string): { bg: string; text: string } => {
 
 export default function TuitionFeesTable() {
   return (
-    <div className="tuition-fees-table-container">
+    <div className="w-full max-w-[1920px] mx-auto py-10 px-5 bg-white max-md:py-5 max-md:px-2.5 max-sm:py-4 max-sm:px-2">
       {tuitionData.map((school, schoolIndex) => {
         const schoolColors = getSchoolColor(school.name);
         return (
-          <div key={schoolIndex} className="school-section">
+          <div key={schoolIndex} className="mb-[60px] last:mb-0 max-md:mb-8 max-sm:mb-6">
             <div 
-              className="school-header" 
+              className="flex items-center gap-3 mb-6 py-5 px-6 rounded-lg border-b-0 max-md:flex-col max-md:items-start max-md:gap-2 max-md:py-4 max-md:px-4 max-sm:py-3 max-sm:px-3" 
               style={{ 
                 backgroundColor: schoolColors.bg, 
                 color: schoolColors.text 
               }}
             >
-              <h2 className="school-name">{school.name}</h2>
-              <div className="school-abbreviation">({school.abbreviation})</div>
+              <h2 className="font-['Outfit'] font-semibold text-2xl leading-8 text-inherit m-0 max-md:text-xl max-md:leading-7 max-sm:text-lg max-sm:leading-6">{school.name}</h2>
+              <div className="font-['Outfit'] font-medium text-xl leading-7 text-inherit opacity-90 max-md:text-base max-sm:text-sm">({school.abbreviation})</div>
             </div>
 
-          <div className="table-wrapper">
-            <table className="tuition-table">
-              <thead>
+          <div className="w-full overflow-x-auto overflow-y-visible border border-[#E5E7EB] rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.1)] max-md:rounded max-sm:shadow-[0_1px_4px_rgba(0,0,0,0.1)]">
+            <table className="w-full border-collapse font-['Outfit'] text-sm bg-white max-[1200px]:text-xs max-md:text-[11px] max-sm:text-[10px]">
+              <thead className="bg-[#072C5F] text-white">
                 <tr>
-                  <th className="col-program">Program</th>
-                  <th className="col-number">Total Semester</th>
-                  <th className="col-number">Total Credit</th>
-                  <th className="col-currency">Admission Fee</th>
-                  <th className="col-currency">Fee per Credit</th>
-                  <th className="col-currency">Payable During Admission</th>
-                  <th className="col-currency">Total Credit Fee</th>
-                  <th className="col-currency">Total Cost</th>
-                  <th className="col-scholarship">Scholarship Offer</th>
-                  <th className="col-currency">Scholarship (Max Cost)</th>
+                  <th className="min-w-[280px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-left max-[1200px]:min-w-[240px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[200px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Program</th>
+                  <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Total Semester</th>
+                  <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Total Credit</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Admission Fee</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Fee per Credit</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Payable During Admission</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Total Credit Fee</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Total Cost</th>
+                  <th className="min-w-[140px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center font-medium max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Scholarship Offer</th>
+                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Scholarship (Max Cost)</th>
                 </tr>
               </thead>
               <tbody>
                 {school.programs.map((program, programIndex) => (
-                  <tr key={programIndex}>
-                    <td className="col-program">{program.name}</td>
-                    <td className="col-number">{program.totalSemester}</td>
-                    <td className="col-number">{program.totalCredit}</td>
-                    <td className="col-currency">{formatCurrency(program.admissionFee)}</td>
-                    <td className="col-currency">{formatCurrency(program.feePerCredit)}</td>
-                    <td className="col-currency">{formatCurrency(program.payableDuringAdmission)}</td>
-                    <td className="col-currency">{formatCurrency(program.totalCreditFee)}</td>
-                    <td className="col-currency">{formatCurrency(program.totalCost)}</td>
-                    <td className="col-scholarship">{program.scholarshipOffer}</td>
-                    <td className="col-currency">{formatCurrency(program.scholarshipMaxCost)}</td>
+                  <tr key={programIndex} className="border-b border-[#E5E7EB] transition-colors hover:bg-[#F5F7FA] last:border-b-0">
+                    <td className="min-w-[280px] font-medium text-left py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[240px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[200px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.name}</td>
+                    <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalSemester}</td>
+                    <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalCredit}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.admissionFee)}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.feePerCredit)}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.payableDuringAdmission)}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.totalCreditFee)}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.totalCost)}</td>
+                    <td className="min-w-[140px] text-center font-medium py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.scholarshipOffer}</td>
+                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.scholarshipMaxCost)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -585,210 +585,6 @@ export default function TuitionFeesTable() {
         </div>
         );
       })}
-
-      <style jsx>{`
-        .tuition-fees-table-container {
-          width: 100%;
-          max-width: 1920px;
-          margin: 0 auto;
-          padding: 40px 20px;
-          background: #ffffff;
-        }
-
-        .school-section {
-          margin-bottom: 60px;
-        }
-
-        .school-section:last-child {
-          margin-bottom: 0;
-        }
-
-        .school-header {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 24px;
-          padding: 20px 24px;
-          border-radius: 8px;
-          border-bottom: none;
-        }
-
-        .school-name {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          line-height: 32px;
-          color: inherit;
-          margin: 0;
-        }
-
-        .school-abbreviation {
-          font-family: 'Outfit', sans-serif;
-          font-style: normal;
-          font-weight: 500;
-          font-size: 20px;
-          line-height: 28px;
-          color: inherit;
-          opacity: 0.9;
-        }
-
-        .table-wrapper {
-          width: 100%;
-          overflow-x: auto;
-          overflow-y: visible;
-          border: 1px solid #E5E7EB;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .tuition-table {
-          width: 100%;
-          border-collapse: collapse;
-          font-family: 'Outfit', sans-serif;
-          font-size: 14px;
-          background: #ffffff;
-        }
-
-        .tuition-table thead {
-          background: #072C5F;
-          color: #ffffff;
-        }
-
-        .tuition-table th {
-          padding: 16px 12px;
-          font-weight: 600;
-          font-size: 13px;
-          line-height: 18px;
-          white-space: nowrap;
-          position: sticky;
-          top: 0;
-          z-index: 10;
-        }
-
-        .tuition-table tbody tr {
-          border-bottom: 1px solid #E5E7EB;
-          transition: background-color 0.2s;
-        }
-
-        .tuition-table tbody tr:hover {
-          background-color: #F5F7FA;
-        }
-
-        .tuition-table tbody tr:last-child {
-          border-bottom: none;
-        }
-
-        .tuition-table td {
-          padding: 14px 12px;
-          color: #1E2021;
-          font-size: 13px;
-          line-height: 18px;
-        }
-
-        .col-program {
-          min-width: 280px;
-          font-weight: 500;
-          text-align: left;
-        }
-
-        .col-number {
-          min-width: 100px;
-          text-align: center;
-        }
-
-        .col-currency {
-          min-width: 120px;
-          text-align: right;
-          font-family: 'Roboto', sans-serif;
-        }
-
-        .col-scholarship {
-          min-width: 140px;
-          text-align: center;
-          font-weight: 500;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-          .tuition-table {
-            font-size: 12px;
-          }
-
-          .tuition-table th,
-          .tuition-table td {
-            padding: 12px 8px;
-            font-size: 12px;
-          }
-
-          .col-program {
-            min-width: 240px;
-          }
-
-          .col-number {
-            min-width: 80px;
-          }
-
-          .col-currency {
-            min-width: 100px;
-          }
-
-          .col-scholarship {
-            min-width: 120px;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .tuition-fees-table-container {
-            padding: 20px 10px;
-          }
-
-          .school-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 8px;
-            padding: 16px 20px;
-          }
-
-          .school-name {
-            font-size: 20px;
-          }
-
-          .school-abbreviation {
-            font-size: 16px;
-          }
-
-          .table-wrapper {
-            border-radius: 4px;
-          }
-
-          .tuition-table {
-            font-size: 11px;
-          }
-
-          .tuition-table th,
-          .tuition-table td {
-            padding: 10px 6px;
-            font-size: 11px;
-          }
-
-          .col-program {
-            min-width: 200px;
-          }
-
-          .col-number {
-            min-width: 70px;
-          }
-
-          .col-currency {
-            min-width: 90px;
-          }
-
-          .col-scholarship {
-            min-width: 100px;
-          }
-        }
-      `}</style>
     </div>
   );
 }

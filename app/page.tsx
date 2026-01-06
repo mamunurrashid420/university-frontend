@@ -10,7 +10,7 @@ import BlogsEventsSection from '@/components/BlogsEventsSection';
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <HeroSlider />
       <AboutSection />
       <ProgramsSection />

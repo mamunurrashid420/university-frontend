@@ -38,7 +38,7 @@ export default function BlogsEventsSection() {
   };
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-[60px] px-4 md:px-8 lg:px-[240px] bg-white">
+    <section className="w-full py-12 md:py-16 lg:py-[60px] px-4 md:px-6 lg:px-[240px] bg-white overflow-x-hidden">
       <div className="max-w-[1441px] mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

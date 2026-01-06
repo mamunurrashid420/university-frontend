@@ -54,7 +54,7 @@ export default function StatsSection() {
 
       {/* Content Container */}
       <div className="relative z-10 w-full h-full flex items-center justify-center">
-        <div className="w-full max-w-[1920px] mx-auto px-4 md:px-8 lg:px-[375px]">
+        <div className="w-full max-w-[1920px] mx-auto px-4 md:px-6 lg:px-[375px]">
           <div className="relative h-[297px] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;

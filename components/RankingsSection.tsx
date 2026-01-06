@@ -36,7 +36,7 @@ export default function RankingsSection() {
   };
 
   return (
-    <section className="w-full min-h-[324px] py-12 md:py-20 px-4 md:px-8 lg:px-[371px] bg-[#F5F7FA] flex items-center">
+    <section className="w-full min-h-[324px] py-12 md:py-20 px-4 md:px-6 lg:px-[371px] bg-[#F5F7FA] flex items-center overflow-x-hidden">
       <div className="max-w-[1179px] mx-auto w-full">
         <div className="flex flex-col gap-1">
           <h3 className="text-xl md:text-2xl leading-8 text-[#0B499D] mb-4">
