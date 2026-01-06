@@ -43,15 +43,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${merriweather.variable} ${roboto.variable} antialiased overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${merriweather.variable} ${roboto.variable} antialiased overflow-x-hidden w-full`}
       >
-        <Header />
-        <div className="min-h-screen bg-white overflow-x-hidden">
-          {children}
+        <div className="w-full max-w-full overflow-x-hidden">
+          <Header />
+          <div className="min-h-screen bg-white overflow-x-hidden max-w-full">
+            {children}
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </body>
     </html>
   );

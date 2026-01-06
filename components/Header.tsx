@@ -23,10 +23,10 @@ export default function Header() {
   ];
 
   return (
-    <header className="w-full">
+    <header className="w-full overflow-x-hidden max-w-full">
       {/* Top Bar */}
-      <div className="w-full h-auto min-h-[108px] bg-[#0A418F] relative py-4">
-        <div className="container-custom h-full flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div className="w-full h-auto min-h-[108px] bg-[#0A418F] relative py-4 overflow-x-hidden max-w-full">
+        <div className="container-custom h-full flex flex-col lg:flex-row items-center justify-between gap-4 relative">
           {/* Logo and Title */}
           <div className="flex items-center gap-2 md:gap-4">
             <div className="w-12 h-12 md:w-[76px] md:h-[76px] rounded-full bg-white flex items-center justify-center shrink-0">
@@ -93,7 +93,7 @@ export default function Header() {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100%-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100vw-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
             <Input
               type="text"
               placeholder="Search …"
@@ -127,14 +127,14 @@ export default function Header() {
       </div>
 
       {/* Navigation Bar */}
-      <nav className="w-full min-h-[72px] bg-white">
-        <div className="container-custom h-full flex items-center">
-          <div className="flex flex-wrap items-center gap-1 md:gap-3 py-2">
+      <nav className="w-full min-h-[72px] bg-white overflow-x-hidden max-w-full">
+        <div className="container-custom h-full flex items-center overflow-x-hidden">
+          <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2">
             {navItems.map((item, index) => (
               <a
                 key={index}
                 href={`#${item.toLowerCase()}`}
-                className="px-2 md:px-[18px] py-2 md:py-3 text-xs md:text-base font-medium text-black hover:text-[#116DEE] transition-colors"
+                className="px-2 md:px-3 xl:px-[18px] py-2 md:py-3 text-xs md:text-sm xl:text-base font-medium text-black hover:text-[#116DEE] transition-colors whitespace-nowrap"
               >
                 {item}
               </a>

@@ -31,8 +31,8 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#031630] text-white">
-      <div className="max-w-[1280px] mx-auto px-5 py-16">
+    <footer className="w-full bg-[#031630] text-white overflow-x-hidden max-w-full">
+      <div className="max-w-[1280px] mx-auto px-5 py-16 w-full">
         {/* Social Media */}
         <div className="flex flex-col items-center gap-5 mb-8">
           <p className="text-lg">Social</p>
@@ -79,7 +79,7 @@ export default function Footer() {
         <div className="h-px bg-white/15 mb-8" />
 
         {/* Footer Content */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-[116px] mb-8">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-[116px] mb-8 items-center lg:justify-center">
           {/* Contact Info */}
           <div className="flex flex-col gap-4">
             <div className="w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center mb-4">
@@ -192,7 +192,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright Bar */}
-      <div className="relative w-full">
+      <div className="relative w-full overflow-x-hidden">
         <svg
           width="100%"
           height="91"
@@ -200,7 +200,7 @@ export default function Footer() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
-          className="w-full h-auto"
+          className="w-full h-auto max-w-full"
         >
           <g opacity="0.72">
             <path

@@ -10,7 +10,7 @@ export default function FeaturesSection() {
         <div className="w-full lg:w-[322.5px] flex flex-col flex-shrink-0">
           <div className="relative h-[285px] bg-white rounded overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-[#F1F7FF] -z-10" />
-            <div className="absolute -left-[198px] -top-[222px] w-[497px] h-[497px] bg-gradient-to-br from-white via-white to-[#F1F7FF] rounded-full" />
+            <div className="absolute -left-[198px] -top-[222px] w-[497px] h-[497px] bg-gradient-to-br from-white via-white to-[#F1F7FF] rounded-full pointer-events-none" />
             <div className="relative p-6 h-full flex flex-col justify-between">
               <div className="flex items-center px-4 py-1 border-l-4 border-[#116DEE]">
                 <span className="text-[#FF8835] text-xl font-normal">
