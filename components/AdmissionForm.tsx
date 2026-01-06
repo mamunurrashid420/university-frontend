@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import useSWR from 'swr';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -41,6 +44,77 @@ interface DropdownData {
   programs: Program[];
 }
 
+// Zod validation schema
+const admissionFormSchema = z.object({
+  semester_id: z.string().min(1, 'Semester is required'),
+  department_id: z.string().min(1, 'Department is required'),
+  program_id: z.string().min(1, 'Program is required'),
+  full_name: z.string().min(1, 'Full name is required').max(255, 'Full name must not exceed 255 characters'),
+  phone_number: z.string().min(1, 'Phone number is required').max(20, 'Phone number must not exceed 20 characters'),
+  email: z.string().min(1, 'Email is required').email('Email must be a valid email address').max(255, 'Email must not exceed 255 characters'),
+  hear_about_us: z.string().optional(),
+  father_name: z.string().max(255, 'Father name must not exceed 255 characters').optional().or(z.literal('')),
+  mother_name: z.string().max(255, 'Mother name must not exceed 255 characters').optional().or(z.literal('')),
+  assisted_by: z.string().max(255, 'Assisted by must not exceed 255 characters').optional().or(z.literal('')),
+  // SSC fields
+  ssc_roll: z.string().min(1, 'SSC roll number is required').max(50, 'SSC roll number must not exceed 50 characters'),
+  ssc_registration_no: z.string().min(1, 'SSC registration number is required').max(50, 'SSC registration number must not exceed 50 characters'),
+  ssc_gpa: z.string().min(1, 'SSC GPA is required').refine((val) => {
+    const num = parseFloat(val);
+    return !isNaN(num) && num >= 0 && num <= 5.00;
+  }, 'SSC GPA must be between 0.00 and 5.00'),
+  ssc_grade: z.string().max(10, 'SSC grade must not exceed 10 characters').optional().or(z.literal('')),
+  ssc_board: z.string().max(100, 'SSC board must not exceed 100 characters').optional().or(z.literal('')),
+  ssc_passing_year: z.string().optional().refine((val) => {
+    if (!val || val === '') return true;
+    const year = parseInt(val);
+    return !isNaN(year) && year >= 1900 && year <= 2100;
+  }, 'Passing year must be between 1900 and 2100').or(z.literal('')),
+  // HSC fields (all optional)
+  hsc_roll: z.string().max(50, 'HSC roll number must not exceed 50 characters').optional().or(z.literal('')),
+  hsc_registration_no: z.string().max(50, 'HSC registration number must not exceed 50 characters').optional().or(z.literal('')),
+  hsc_gpa: z.string().optional().refine((val) => {
+    if (!val || val === '') return true;
+    const num = parseFloat(val);
+    return !isNaN(num) && num >= 0 && num <= 5.00;
+  }, 'HSC GPA must be between 0.00 and 5.00').or(z.literal('')),
+  hsc_grade: z.string().max(10, 'HSC grade must not exceed 10 characters').optional().or(z.literal('')),
+  hsc_board: z.string().max(100, 'HSC board must not exceed 100 characters').optional().or(z.literal('')),
+  hsc_passing_year: z.string().optional().refine((val) => {
+    if (!val || val === '') return true;
+    const year = parseInt(val);
+    return !isNaN(year) && year >= 1900 && year <= 2100;
+  }, 'Passing year must be between 1900 and 2100').or(z.literal('')),
+  // Honors fields (all optional)
+  honors_roll: z.string().max(50, 'Honors roll number must not exceed 50 characters').optional().or(z.literal('')),
+  honors_registration_no: z.string().max(50, 'Honors registration number must not exceed 50 characters').optional().or(z.literal('')),
+  honors_gpa: z.string().optional().refine((val) => {
+    if (!val || val === '') return true;
+    const num = parseFloat(val);
+    return !isNaN(num) && num >= 0 && num <= 4.00;
+  }, 'Honors GPA must be between 0.00 and 4.00').or(z.literal('')),
+  honors_grade: z.string().max(50, 'Honors grade must not exceed 50 characters').optional().or(z.literal('')),
+  honors_board: z.string().max(100, 'Honors board must not exceed 100 characters').optional().or(z.literal('')),
+  honors_passing_year: z.string().optional().refine((val) => {
+    if (!val || val === '') return true;
+    const year = parseInt(val);
+    return !isNaN(year) && year >= 1900 && year <= 2100;
+  }, 'Passing year must be between 1900 and 2100').or(z.literal('')),
+  honors_institution: z.string().max(255, 'Honors institution must not exceed 255 characters').optional().or(z.literal('')),
+}).refine((data) => {
+  // Validate hear_about_us if provided
+  if (data.hear_about_us && data.hear_about_us !== '') {
+    const validOptions = ['Website', 'Social Media', 'Friend/Relative', 'Advertisement', 'Other'];
+    return validOptions.includes(data.hear_about_us);
+  }
+  return true;
+}, {
+  message: 'Please select a valid option',
+  path: ['hear_about_us'],
+});
+
+type AdmissionFormData = z.infer<typeof admissionFormSchema>;
+
 // Fetcher function for useSWR
 const fetcher = async (url: string): Promise<DropdownData> => {
   const res = await fetch(url, {
@@ -61,88 +135,101 @@ export default function AdmissionForm() {
     fetcher
   );
 
-  const [formData, setFormData] = useState({
-    semester_id: '',
-    department_id: '',
-    program_id: '',
-    full_name: '',
-    phone_number: '',
-    email: '',
-    hear_about_us: '',
-    father_name: '',
-    mother_name: '',
-    assisted_by: '',
-    // SSC fields
-    ssc_roll: '',
-    ssc_registration_no: '',
-    ssc_gpa: '',
-    ssc_grade: '',
-    ssc_board: '',
-    ssc_passing_year: '',
-    // HSC fields
-    hsc_roll: '',
-    hsc_registration_no: '',
-    hsc_gpa: '',
-    hsc_grade: '',
-    hsc_board: '',
-    hsc_passing_year: '',
-    // Honors fields
-    honors_roll: '',
-    honors_registration_no: '',
-    honors_gpa: '',
-    honors_grade: '',
-    honors_board: '',
-    honors_passing_year: '',
-    honors_institution: '',
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [apiErrors, setApiErrors] = useState<Record<string, string[]>>({});
+  const formRefs = useRef<Record<string, HTMLElement | null>>({});
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<AdmissionFormData>({
+    resolver: zodResolver(admissionFormSchema),
+    defaultValues: {
+      semester_id: '',
+      department_id: '',
+      program_id: '',
+      full_name: '',
+      phone_number: '',
+      email: '',
+      hear_about_us: '',
+      father_name: '',
+      mother_name: '',
+      assisted_by: '',
+      ssc_roll: '',
+      ssc_registration_no: '',
+      ssc_gpa: '',
+      ssc_grade: '',
+      ssc_board: '',
+      ssc_passing_year: '',
+      hsc_roll: '',
+      hsc_registration_no: '',
+      hsc_gpa: '',
+      hsc_grade: '',
+      hsc_board: '',
+      hsc_passing_year: '',
+      honors_roll: '',
+      honors_registration_no: '',
+      honors_gpa: '',
+      honors_grade: '',
+      honors_board: '',
+      honors_passing_year: '',
+      honors_institution: '',
+    },
   });
 
-  const [errors, setErrors] = useState<Record<string, string[]>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const departmentId = watch('department_id');
 
   // Reset program when department changes
   useEffect(() => {
-    if (formData.department_id) {
-      setFormData(prev => ({ ...prev, program_id: '' }));
+    if (departmentId) {
+      setValue('program_id', '');
     }
-  }, [formData.department_id]);
+  }, [departmentId, setValue]);
 
-  // Clear errors when field changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
+  // Scroll to top when form is successfully submitted
+  useEffect(() => {
+    if (submitSuccess) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
-    }
-  };
+  }, [submitSuccess]);
 
   // Filter programs by selected department
   const availablePrograms = data?.programs.filter(
-    program => program.department_id === parseInt(formData.department_id)
+    program => program.department_id === parseInt(departmentId || '0')
   ) || [];
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // Helper to combine register ref with formRefs
+  const registerWithRef = (name: keyof AdmissionFormData) => {
+    const { ref, ...rest } = register(name);
+    return {
+      ...rest,
+      ref: (el: HTMLInputElement | null) => {
+        ref(el);
+        formRefs.current[name] = el;
+      }
+    };
+  };
+
+  // Scroll to first error
+  const scrollToFirstError = () => {
+    const firstErrorField = Object.keys(errors)[0] || Object.keys(apiErrors)[0];
+    if (firstErrorField) {
+      const errorElement = formRefs.current[firstErrorField];
+      if (errorElement) {
+        errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        errorElement.focus();
+      }
+    }
+  };
+
+  const onSubmit = async (formData: AdmissionFormData) => {
     setSubmitSuccess(false);
-    setErrors({});
+    setApiErrors({});
 
     // Transform form data to API format
     const submitData: any = {
@@ -197,52 +284,35 @@ export default function AdmissionForm() {
 
       if (response.ok) {
         setSubmitSuccess(true);
-        // Reset form
-        setFormData({
-          semester_id: '',
-          department_id: '',
-          program_id: '',
-          full_name: '',
-          phone_number: '',
-          email: '',
-          hear_about_us: '',
-          father_name: '',
-          mother_name: '',
-          assisted_by: '',
-          ssc_roll: '',
-          ssc_registration_no: '',
-          ssc_gpa: '',
-          ssc_grade: '',
-          ssc_board: '',
-          ssc_passing_year: '',
-          hsc_roll: '',
-          hsc_registration_no: '',
-          hsc_gpa: '',
-          hsc_grade: '',
-          hsc_board: '',
-          hsc_passing_year: '',
-          honors_roll: '',
-          honors_registration_no: '',
-          honors_gpa: '',
-          honors_grade: '',
-          honors_board: '',
-          honors_passing_year: '',
-          honors_institution: '',
-        });
-        // Hide success message after 5 seconds
-        setTimeout(() => setSubmitSuccess(false), 5000);
+        reset();
       } else {
-        // Handle validation errors
+        // Handle validation errors from API
         if (responseData.errors) {
-          setErrors(responseData.errors);
+          setApiErrors(responseData.errors);
+          // Scroll to first API error
+          setTimeout(() => {
+            const firstErrorField = Object.keys(responseData.errors)[0];
+            if (firstErrorField) {
+              const errorElement = formRefs.current[firstErrorField];
+              if (errorElement) {
+                errorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                errorElement.focus();
+              }
+            }
+          }, 100);
         }
       }
     } catch (error) {
       console.error('Network error:', error);
-      setErrors({ _network: ['Network error. Please try again.'] });
-    } finally {
-      setIsSubmitting(false);
+      setApiErrors({ _network: ['Network error. Please try again.'] });
     }
+  };
+
+  const onError = () => {
+    // Scroll to first validation error
+    setTimeout(() => {
+      scrollToFirstError();
+    }, 100);
   };
 
   return (
@@ -288,56 +358,75 @@ export default function AdmissionForm() {
           </div>
         </div>
 
-        {/* Form Content */}
-        <form onSubmit={handleSubmit} className="relative flex flex-col items-center gap-6 p-5 pt-8 max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
-          {/* Form Title */}
-          <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3">
-            <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5">Online Admission Information Form</h1>
-            
-            {/* Action Buttons */}
-            <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
-              <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[203px] border-2 border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-tight">Tuition Fee</span>
-                <span className="block leading-tight">Calculator</span>
-              </Button>
-              <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[183px] border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-tight">Check Tuition</span>
-                <span className="block leading-tight">Fees</span>
-              </Button>
-              <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-tight">Scholarship</span>
-                <span className="block leading-tight">Opportunities</span>
-              </Button>
+        {/* Success Message View - Replaces Form */}
+        {submitSuccess ? (
+          <div className="relative flex flex-col items-center justify-center gap-6 p-8 min-h-[600px] max-md:p-6 max-sm:p-4">
+            <div className="flex flex-col items-center gap-6 max-w-[500px] text-center">
+              {/* Success Icon */}
+              <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center max-md:w-16 max-md:h-16 max-sm:w-14 max-sm:h-14">
+                <svg className="w-12 h-12 text-green-600 max-md:w-10 max-md:h-10 max-sm:w-8 max-sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              
+              {/* Success Message */}
+              <div className="flex flex-col items-center gap-3">
+                <h2 className="font-['Merriweather'] font-bold text-2xl leading-8 text-[#1E2021] max-md:text-xl max-sm:text-lg">
+                  Application Submitted Successfully!
+                </h2>
+                <p className="font-['Outfit'] font-normal text-base leading-6 text-[#4A5568] max-md:text-sm max-sm:text-xs">
+                  Thank you for your interest in Apparel Institute of Fashion & Technology. We have received your admission application and will review it shortly.
+                </p>
+                <p className="font-['Outfit'] font-normal text-base leading-6 text-[#4A5568] max-md:text-sm max-sm:text-xs">
+                  Our admission team will contact you soon with further information.
+                </p>
+              </div>
             </div>
           </div>
-
-          {/* Success Message */}
-          {submitSuccess && (
-            <div className="w-full max-w-[659px] p-4 bg-green-50 border border-green-200 rounded-lg text-green-800 font-['Outfit'] text-sm">
-              Admission form submitted successfully!
+        ) : (
+          /* Form Content */
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="relative flex flex-col items-center gap-6 p-5 pt-8 max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
+            {/* Form Title */}
+            <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3">
+              <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5">Online Admission Information Form</h1>
+              
+              {/* Action Buttons */}
+              <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
+                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[203px] border-2 border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                  <span className="block leading-tight">Tuition Fee</span>
+                  <span className="block leading-tight">Calculator</span>
+                </Button>
+                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[183px] border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                  <span className="block leading-tight">Check Tuition</span>
+                  <span className="block leading-tight">Fees</span>
+                </Button>
+                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                  <span className="block leading-tight">Scholarship</span>
+                  <span className="block leading-tight">Opportunities</span>
+                </Button>
+              </div>
             </div>
-          )}
 
-          {/* Network Error Message */}
-          {errors._network && (
-            <div className="w-full max-w-[659px] p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-['Outfit'] text-sm">
-              {errors._network[0]}
-            </div>
-          )}
+            {/* Network Error Message */}
+            {apiErrors._network && (
+              <div className="w-full max-w-[659px] p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-['Outfit'] text-sm">
+                {apiErrors._network[0]}
+              </div>
+            )}
 
-          {/* Loading State for Dropdowns */}
-          {isLoadingDropdowns && (
-            <div className="w-full max-w-[659px] p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 font-['Outfit'] text-sm text-center">
-              Loading form options...
-            </div>
-          )}
+            {/* Loading State for Dropdowns */}
+            {isLoadingDropdowns && (
+              <div className="w-full max-w-[659px] p-4 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 font-['Outfit'] text-sm text-center">
+                Loading form options...
+              </div>
+            )}
 
-          {/* Dropdown Error */}
-          {dropdownError && (
-            <div className="w-full max-w-[659px] p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-['Outfit'] text-sm">
-              Failed to load form options. Please refresh the page.
-            </div>
-          )}
+            {/* Dropdown Error */}
+            {dropdownError && (
+              <div className="w-full max-w-[659px] p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 font-['Outfit'] text-sm">
+                Failed to load form options. Please refresh the page.
+              </div>
+            )}
 
           {/* Basic Information Section */}
           <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3">
@@ -351,24 +440,37 @@ export default function AdmissionForm() {
                     Semester<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </Label>
                   <div className="relative w-full block">
-                    <Select
-                      value={formData.semester_id || undefined}
-                      onValueChange={(value) => handleSelectChange('semester_id', value)}
-                      disabled={isLoadingDropdowns}
-                    >
-                      <SelectTrigger className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.semester_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}>
-                        <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {data?.semesters.map((semester) => (
-                          <SelectItem key={semester.id} value={semester.id.toString()}>
-                            {semester.name} {semester.year}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.semester_id && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.semester_id[0]}</p>
+                    <Controller
+                      name="semester_id"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value || undefined}
+                          onValueChange={field.onChange}
+                          disabled={isLoadingDropdowns}
+                        >
+                          <SelectTrigger
+                            ref={(el) => {
+                              formRefs.current['semester_id'] = el;
+                            }}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.semester_id || apiErrors.semester_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                          >
+                            <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {data?.semesters.map((semester) => (
+                              <SelectItem key={semester.id} value={semester.id.toString()}>
+                                {semester.name} {semester.year}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {(errors.semester_id || apiErrors.semester_id) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.semester_id?.message || apiErrors.semester_id?.[0]}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -381,24 +483,37 @@ export default function AdmissionForm() {
                     Department<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </Label>
                   <div className="relative w-full block">
-                    <Select
-                      value={formData.department_id || undefined}
-                      onValueChange={(value) => handleSelectChange('department_id', value)}
-                      disabled={isLoadingDropdowns}
-                    >
-                      <SelectTrigger className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.department_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}>
-                        <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {data?.departments.map((dept) => (
-                          <SelectItem key={dept.id} value={dept.id.toString()}>
-                            {dept.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.department_id && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.department_id[0]}</p>
+                    <Controller
+                      name="department_id"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value || undefined}
+                          onValueChange={field.onChange}
+                          disabled={isLoadingDropdowns}
+                        >
+                          <SelectTrigger
+                            ref={(el) => {
+                              formRefs.current['department_id'] = el;
+                            }}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.department_id || apiErrors.department_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                          >
+                            <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {data?.departments.map((dept) => (
+                              <SelectItem key={dept.id} value={dept.id.toString()}>
+                                {dept.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {(errors.department_id || apiErrors.department_id) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.department_id?.message || apiErrors.department_id?.[0]}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -408,24 +523,37 @@ export default function AdmissionForm() {
                     Program<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
                   </Label>
                   <div className="relative w-full block">
-                    <Select
-                      value={formData.program_id || undefined}
-                      onValueChange={(value) => handleSelectChange('program_id', value)}
-                      disabled={isLoadingDropdowns || !formData.department_id}
-                    >
-                      <SelectTrigger className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.program_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}>
-                        <SelectValue placeholder={!formData.department_id ? "Select department first" : "Select option"} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availablePrograms.map((program) => (
-                          <SelectItem key={program.id} value={program.id.toString()}>
-                            {program.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {errors.program_id && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.program_id[0]}</p>
+                    <Controller
+                      name="program_id"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value || undefined}
+                          onValueChange={field.onChange}
+                          disabled={isLoadingDropdowns || !departmentId}
+                        >
+                          <SelectTrigger
+                            ref={(el) => {
+                              formRefs.current['program_id'] = el;
+                            }}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.program_id || apiErrors.program_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                          >
+                            <SelectValue placeholder={!departmentId ? "Select department first" : "Select option"} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {availablePrograms.map((program) => (
+                              <SelectItem key={program.id} value={program.id.toString()}>
+                                {program.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {(errors.program_id || apiErrors.program_id) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.program_id?.message || apiErrors.program_id?.[0]}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -439,14 +567,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="text"
-                    name="full_name"
-                    value={formData.full_name}
-                    onChange={handleChange}
+                    {...registerWithRef('full_name')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.full_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.full_name || apiErrors.full_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.full_name && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.full_name[0]}</p>
+                  {(errors.full_name || apiErrors.full_name) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.full_name?.message || apiErrors.full_name?.[0]}
+                    </p>
                   )}
                 </div>
 
@@ -456,14 +584,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="tel"
-                    name="phone_number"
-                    value={formData.phone_number}
-                    onChange={handleChange}
+                    {...registerWithRef('phone_number')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.phone_number ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.phone_number || apiErrors.phone_number ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.phone_number && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.phone_number[0]}</p>
+                  {(errors.phone_number || apiErrors.phone_number) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.phone_number?.message || apiErrors.phone_number?.[0]}
+                    </p>
                   )}
                 </div>
               </div>
@@ -476,14 +604,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    {...registerWithRef('email')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.email ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.email || apiErrors.email ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.email && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.email[0]}</p>
+                  {(errors.email || apiErrors.email) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.email?.message || apiErrors.email?.[0]}
+                    </p>
                   )}
                 </div>
 
@@ -492,23 +620,36 @@ export default function AdmissionForm() {
                     How did you hear about us?
                   </Label>
                   <div className="relative w-full block">
-                    <Select
-                      value={formData.hear_about_us || undefined}
-                      onValueChange={(value) => handleSelectChange('hear_about_us', value)}
-                    >
-                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
-                        <SelectValue placeholder="Select option" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="Website">Website</SelectItem>
-                        <SelectItem value="Social Media">Social Media</SelectItem>
-                        <SelectItem value="Friend/Relative">Friend/Relative</SelectItem>
-                        <SelectItem value="Advertisement">Advertisement</SelectItem>
-                        <SelectItem value="Other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {errors.hear_about_us && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.hear_about_us[0]}</p>
+                    <Controller
+                      name="hear_about_us"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          value={field.value || undefined}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger
+                            ref={(el) => {
+                              formRefs.current['hear_about_us'] = el;
+                            }}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.hear_about_us || apiErrors.hear_about_us ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                          >
+                            <SelectValue placeholder="Select option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Website">Website</SelectItem>
+                            <SelectItem value="Social Media">Social Media</SelectItem>
+                            <SelectItem value="Friend/Relative">Friend/Relative</SelectItem>
+                            <SelectItem value="Advertisement">Advertisement</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                    {(errors.hear_about_us || apiErrors.hear_about_us) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hear_about_us?.message || apiErrors.hear_about_us?.[0]}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -522,14 +663,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="text"
-                    name="father_name"
-                    value={formData.father_name}
-                    onChange={handleChange}
+                    {...registerWithRef('father_name')}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.father_name || apiErrors.father_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.father_name && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.father_name[0]}</p>
+                  {(errors.father_name || apiErrors.father_name) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.father_name?.message || apiErrors.father_name?.[0]}
+                    </p>
                   )}
                 </div>
 
@@ -539,14 +680,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="text"
-                    name="mother_name"
-                    value={formData.mother_name}
-                    onChange={handleChange}
+                    {...registerWithRef('mother_name')}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.mother_name || apiErrors.mother_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.mother_name && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.mother_name[0]}</p>
+                  {(errors.mother_name || apiErrors.mother_name) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.mother_name?.message || apiErrors.mother_name?.[0]}
+                    </p>
                   )}
                 </div>
               </div>
@@ -559,14 +700,14 @@ export default function AdmissionForm() {
                   </Label>
                   <Input
                     type="text"
-                    name="assisted_by"
-                    value={formData.assisted_by}
-                    onChange={handleChange}
+                    {...registerWithRef('assisted_by')}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.assisted_by || apiErrors.assisted_by ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
-                  {errors.assisted_by && (
-                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.assisted_by[0]}</p>
+                  {(errors.assisted_by || apiErrors.assisted_by) && (
+                    <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                      {errors.assisted_by?.message || apiErrors.assisted_by?.[0]}
+                    </p>
                   )}
                 </div>
               </div>
@@ -586,81 +727,90 @@ export default function AdmissionForm() {
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
                     <Input
                       type="text"
-                      name="ssc_roll"
-                      value={formData.ssc_roll}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_roll')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_roll || apiErrors.ssc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.ssc_roll && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.ssc_roll[0]}</p>
+                    {(errors.ssc_roll || apiErrors.ssc_roll) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_roll?.message || apiErrors.ssc_roll?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Registration Number</Label>
                     <Input
                       type="text"
-                      name="ssc_registration_no"
-                      value={formData.ssc_registration_no}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_registration_no')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_registration_no || apiErrors.ssc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.ssc_registration_no && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.ssc_registration_no[0]}</p>
+                    {(errors.ssc_registration_no || apiErrors.ssc_registration_no) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_registration_no?.message || apiErrors.ssc_registration_no?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">GPA</Label>
                     <Input
                       type="number"
-                      name="ssc_gpa"
-                      value={formData.ssc_gpa}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_gpa')}
                       placeholder="0.00 - 5.00"
                       step="0.01"
                       min="0"
                       max="5"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_gpa || apiErrors.ssc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.ssc_gpa && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.ssc_gpa[0]}</p>
+                    {(errors.ssc_gpa || apiErrors.ssc_gpa) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_gpa?.message || apiErrors.ssc_gpa?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
                     <Input
                       type="text"
-                      name="ssc_grade"
-                      value={formData.ssc_grade}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_grade')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_grade || apiErrors.ssc_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.ssc_grade || apiErrors.ssc_grade) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_grade?.message || apiErrors.ssc_grade?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Board</Label>
                     <Input
                       type="text"
-                      name="ssc_board"
-                      value={formData.ssc_board}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_board')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_board || apiErrors.ssc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.ssc_board || apiErrors.ssc_board) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_board?.message || apiErrors.ssc_board?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Passing Year</Label>
                     <Input
                       type="number"
-                      name="ssc_passing_year"
-                      value={formData.ssc_passing_year}
-                      onChange={handleChange}
+                      {...registerWithRef('ssc_passing_year')}
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_passing_year || apiErrors.ssc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.ssc_passing_year || apiErrors.ssc_passing_year) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.ssc_passing_year?.message || apiErrors.ssc_passing_year?.[0]}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -673,81 +823,90 @@ export default function AdmissionForm() {
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
                     <Input
                       type="text"
-                      name="hsc_roll"
-                      value={formData.hsc_roll}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_roll')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_roll || apiErrors.hsc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.hsc_roll && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.hsc_roll[0]}</p>
+                    {(errors.hsc_roll || apiErrors.hsc_roll) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_roll?.message || apiErrors.hsc_roll?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Registration Number</Label>
                     <Input
                       type="text"
-                      name="hsc_registration_no"
-                      value={formData.hsc_registration_no}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_registration_no')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_registration_no || apiErrors.hsc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.hsc_registration_no && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.hsc_registration_no[0]}</p>
+                    {(errors.hsc_registration_no || apiErrors.hsc_registration_no) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_registration_no?.message || apiErrors.hsc_registration_no?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">GPA</Label>
                     <Input
                       type="number"
-                      name="hsc_gpa"
-                      value={formData.hsc_gpa}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_gpa')}
                       placeholder="0.00 - 5.00"
                       step="0.01"
                       min="0"
                       max="5"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_gpa || apiErrors.hsc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.hsc_gpa && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.hsc_gpa[0]}</p>
+                    {(errors.hsc_gpa || apiErrors.hsc_gpa) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_gpa?.message || apiErrors.hsc_gpa?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
                     <Input
                       type="text"
-                      name="hsc_grade"
-                      value={formData.hsc_grade}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_grade')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_grade || apiErrors.hsc_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.hsc_grade || apiErrors.hsc_grade) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_grade?.message || apiErrors.hsc_grade?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Board</Label>
                     <Input
                       type="text"
-                      name="hsc_board"
-                      value={formData.hsc_board}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_board')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_board || apiErrors.hsc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.hsc_board || apiErrors.hsc_board) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_board?.message || apiErrors.hsc_board?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Passing Year</Label>
                     <Input
                       type="number"
-                      name="hsc_passing_year"
-                      value={formData.hsc_passing_year}
-                      onChange={handleChange}
+                      {...registerWithRef('hsc_passing_year')}
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_passing_year || apiErrors.hsc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.hsc_passing_year || apiErrors.hsc_passing_year) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.hsc_passing_year?.message || apiErrors.hsc_passing_year?.[0]}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -760,92 +919,104 @@ export default function AdmissionForm() {
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
                     <Input
                       type="text"
-                      name="honors_roll"
-                      value={formData.honors_roll}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_roll')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_roll || apiErrors.honors_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.honors_roll && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.honors_roll[0]}</p>
+                    {(errors.honors_roll || apiErrors.honors_roll) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_roll?.message || apiErrors.honors_roll?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Registration Number</Label>
                     <Input
                       type="text"
-                      name="honors_registration_no"
-                      value={formData.honors_registration_no}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_registration_no')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_registration_no || apiErrors.honors_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.honors_registration_no && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.honors_registration_no[0]}</p>
+                    {(errors.honors_registration_no || apiErrors.honors_registration_no) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_registration_no?.message || apiErrors.honors_registration_no?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">GPA</Label>
                     <Input
                       type="number"
-                      name="honors_gpa"
-                      value={formData.honors_gpa}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_gpa')}
                       placeholder="0.00 - 4.00"
                       step="0.01"
                       min="0"
                       max="4"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_gpa || apiErrors.honors_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
-                    {errors.honors_gpa && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">{errors.honors_gpa[0]}</p>
+                    {(errors.honors_gpa || apiErrors.honors_gpa) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_gpa?.message || apiErrors.honors_gpa?.[0]}
+                      </p>
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
                     <Input
                       type="text"
-                      name="honors_grade"
-                      value={formData.honors_grade}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_grade')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_grade || apiErrors.honors_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.honors_grade || apiErrors.honors_grade) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_grade?.message || apiErrors.honors_grade?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Board</Label>
                     <Input
                       type="text"
-                      name="honors_board"
-                      value={formData.honors_board}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_board')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_board || apiErrors.honors_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.honors_board || apiErrors.honors_board) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_board?.message || apiErrors.honors_board?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Passing Year</Label>
                     <Input
                       type="number"
-                      name="honors_passing_year"
-                      value={formData.honors_passing_year}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_passing_year')}
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_passing_year || apiErrors.honors_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.honors_passing_year || apiErrors.honors_passing_year) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_passing_year?.message || apiErrors.honors_passing_year?.[0]}
+                      </p>
+                    )}
                   </div>
                   <div className="flex flex-col items-start gap-2 col-span-2 max-[920px]:col-span-1">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Institution</Label>
                     <Input
                       type="text"
-                      name="honors_institution"
-                      value={formData.honors_institution}
-                      onChange={handleChange}
+                      {...registerWithRef('honors_institution')}
                       placeholder="Write here"
-                      className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_institution || apiErrors.honors_institution ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
+                    {(errors.honors_institution || apiErrors.honors_institution) && (
+                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
+                        {errors.honors_institution?.message || apiErrors.honors_institution?.[0]}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -863,6 +1034,7 @@ export default function AdmissionForm() {
             </Button>
           </div>
         </form>
+        )}
       </div>
     </div>
   );
