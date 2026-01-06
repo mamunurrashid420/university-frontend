@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const events = [
   {
@@ -77,7 +79,7 @@ export default function BlogsEventsSection() {
                   $1 billion goal, the campaign is expanding U of T's global
                   leadership capacity.
                 </p>
-                <button className="w-fit px-8 py-[18px] bg-[#116DEE] rounded-[5px] flex items-center gap-2.5 text-white text-lg font-normal hover:bg-[#0A418F] transition-colors">
+                <Button className="w-fit px-8 py-[18px] bg-[#116DEE] rounded-[5px] flex items-center gap-2.5 text-white text-lg font-normal hover:bg-[#0A418F] transition-colors">
                   <span>Share your Idea</span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -87,7 +89,7 @@ export default function BlogsEventsSection() {
                       strokeLinecap="round"
                     />
                   </svg>
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -214,20 +216,20 @@ export default function BlogsEventsSection() {
                   onSubmit={handleSubscribe}
                   className="w-full max-w-[330px] flex flex-col gap-4"
                 >
-                  <input
+                  <Input
                     type="email"
                     placeholder="Your Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full h-[58px] px-5 bg-[#1A2742] border border-[#1A2742] text-white placeholder:text-[#94A8D1] outline-none rounded"
+                    className="w-full h-[58px] px-5 bg-[#1A2742] border border-[#1A2742] text-white placeholder:text-[#94A8D1] outline-none rounded focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-[#1A2742]"
                     required
                   />
-                  <button
+                  <Button
                     type="submit"
                     className="w-full h-[54px] bg-[#408AF2] text-white text-[15px] font-bold rounded hover:bg-[#116DEE] transition-colors"
                   >
                     Subscribe
-                  </button>
+                  </Button>
                 </form>
               </div>
             </div>

@@ -2,7 +2,16 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export default function AdmissionForm() {
   const [formData, setFormData] = useState({
@@ -20,10 +29,17 @@ export default function AdmissionForm() {
     honors: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData({
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -78,18 +94,18 @@ export default function AdmissionForm() {
             
             {/* Action Buttons */}
             <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
-              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[203px] border border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[203px] border border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
                 <span className="block leading-[1.2]">Tuition Fee</span>
                 <span className="block leading-[1.2]">Calculator</span>
-              </button>
-              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[183px] border border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+              </Button>
+              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[183px] border border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
                 <span className="block leading-[1.2]">Check Tuition</span>
                 <span className="block leading-[1.2]">Fees</span>
-              </button>
-              <button className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[233px] border border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+              </Button>
+              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[233px] border border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
                 <span className="block leading-[1.2]">Scholarship</span>
                 <span className="block leading-[1.2]">Opportunities</span>
-              </button>
+              </Button>
             </div>
           </div>
 
@@ -101,38 +117,42 @@ export default function AdmissionForm() {
               {/* Row 1: Admission Year & Semester */}
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Admission Year<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
+                  </Label>
                   <div className="relative w-full block">
-                    <select
-                      name="admissionYear"
-                      value={formData.admissionYear}
-                      onChange={handleChange}
-                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
+                    <Select
+                      value={formData.admissionYear || undefined}
+                      onValueChange={(value) => handleSelectChange('admissionYear', value)}
                     >
-                      <option value="">Select option</option>
-                      <option value="2026">2026</option>
-                      <option value="2027">2027</option>
-                    </select>
+                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
+                        <SelectValue placeholder="Select option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="2026">2026</SelectItem>
+                        <SelectItem value="2027">2027</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Semester<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
+                  </Label>
                   <div className="relative w-full block">
-                    <select
-                      name="semester"
-                      value={formData.semester}
-                      onChange={handleChange}
-                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
+                    <Select
+                      value={formData.semester || undefined}
+                      onValueChange={(value) => handleSelectChange('semester', value)}
                     >
-                      <option value="">Select option</option>
-                      <option value="spring">Spring</option>
-                      <option value="fall">Fall</option>
-                    </select>
+                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
+                        <SelectValue placeholder="Select option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="spring">Spring</SelectItem>
+                        <SelectItem value="fall">Fall</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -140,38 +160,42 @@ export default function AdmissionForm() {
               {/* Row 2: Department & Program */}
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Department<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
+                  </Label>
                   <div className="relative w-full block">
-                    <select
-                      name="department"
-                      value={formData.department}
-                      onChange={handleChange}
-                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
+                    <Select
+                      value={formData.department || undefined}
+                      onValueChange={(value) => handleSelectChange('department', value)}
                     >
-                      <option value="">Select option</option>
-                      <option value="fashion">Fashion Design</option>
-                      <option value="technology">Technology</option>
-                    </select>
+                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
+                        <SelectValue placeholder="Select option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="fashion">Fashion Design</SelectItem>
+                        <SelectItem value="technology">Technology</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Program<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
+                  </Label>
                   <div className="relative w-full block">
-                    <select
-                      name="program"
-                      value={formData.program}
-                      onChange={handleChange}
-                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
+                    <Select
+                      value={formData.program || undefined}
+                      onValueChange={(value) => handleSelectChange('program', value)}
                     >
-                      <option value="">Select option</option>
-                      <option value="bachelor">Bachelor</option>
-                      <option value="master">Master</option>
-                    </select>
+                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
+                        <SelectValue placeholder="Select option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="bachelor">Bachelor</SelectItem>
+                        <SelectItem value="master">Master</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -179,30 +203,30 @@ export default function AdmissionForm() {
               {/* Row 3: Full Name & Phone Number */}
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Full Name<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Phone Number<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="tel"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
@@ -210,35 +234,37 @@ export default function AdmissionForm() {
               {/* Row 4: Email & How did you hear about us */}
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Email<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     How did you hear about us?
-                  </label>
+                  </Label>
                   <div className="relative w-full block">
-                    <select
-                      name="hearAboutUs"
-                      value={formData.hearAboutUs}
-                      onChange={handleChange}
-                      className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white appearance-none focus:outline-none focus:border-[#116DEE]"
+                    <Select
+                      value={formData.hearAboutUs || undefined}
+                      onValueChange={(value) => handleSelectChange('hearAboutUs', value)}
                     >
-                      <option value="">Select option</option>
-                      <option value="website">Website</option>
-                      <option value="social-media">Social Media</option>
-                      <option value="friend">Friend</option>
-                    </select>
+                      <SelectTrigger className="box-border w-full h-11 py-3 px-4 pr-10 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE]">
+                        <SelectValue placeholder="Select option" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="website">Website</SelectItem>
+                        <SelectItem value="social-media">Social Media</SelectItem>
+                        <SelectItem value="friend">Friend</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -246,16 +272,16 @@ export default function AdmissionForm() {
               {/* Row 5: Who assisted you */}
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 w-full">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Who assisted you for your admission?
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
                     name="assistedBy"
                     value={formData.assistedBy}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
@@ -269,44 +295,44 @@ export default function AdmissionForm() {
             <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4">
               <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     SSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
                     name="ssc"
                     value={formData.ssc}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     HSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
                     name="hsc"
                     value={formData.hsc}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
 
                 <div className="flex flex-col items-start gap-2 flex-1">
-                  <label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
+                  <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Honors/Equivalent/Other<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
-                  </label>
-                  <input
+                  </Label>
+                  <Input
                     type="text"
                     name="honors"
                     value={formData.honors}
                     onChange={handleChange}
                     placeholder="Write here"
-                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:outline-none focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
+                    className="box-border w-full h-11 py-3 px-4 border border-[#E5E7EB] rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD]"
                   />
                 </div>
               </div>
@@ -315,9 +341,9 @@ export default function AdmissionForm() {
 
           {/* Submit Button */}
           <div className="flex flex-row justify-center items-center w-full mt-5 max-md:mt-4 max-sm:mt-3">
-            <button className="w-[258px] h-12 py-3 px-8 bg-gradient-to-r from-[#0056EC] to-[#01AD9F] rounded-lg border-none font-['Outfit'] font-medium text-xl leading-6 text-white cursor-pointer transition-opacity hover:opacity-90 max-md:w-full max-md:max-w-[258px] max-md:text-lg max-sm:text-base max-sm:h-11 max-sm:py-2.5 max-sm:px-6">
+            <Button className="w-[258px] h-12 py-3 px-8 bg-gradient-to-r from-[#0056EC] to-[#01AD9F] rounded-lg border-none font-['Outfit'] font-medium text-xl leading-6 text-white cursor-pointer transition-opacity hover:opacity-90 max-md:w-full max-md:max-w-[258px] max-md:text-lg max-sm:text-base max-sm:h-11 max-sm:py-2.5 max-sm:px-6">
               Tuition Fee Calculator
-            </button>
+            </Button>
           </div>
         </div>
       </div>

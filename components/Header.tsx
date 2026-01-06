@@ -2,6 +2,8 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,7 +29,7 @@ export default function Header() {
         <div className="container-custom h-full flex flex-col lg:flex-row items-center justify-between gap-4">
           {/* Logo and Title */}
           <div className="flex items-center gap-2 md:gap-4">
-            <div className="w-12 h-12 md:w-[76px] md:h-[76px] rounded-full bg-white flex items-center justify-center flex-shrink-0">
+            <div className="w-12 h-12 md:w-[76px] md:h-[76px] rounded-full bg-white flex items-center justify-center shrink-0">
               <Image
                 src="/images/logo/logo.jpg"
                 alt="AIFT Logo"
@@ -92,16 +94,16 @@ export default function Header() {
 
           {/* Search Bar */}
           <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100%-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
-            <input
+            <Input
               type="text"
               placeholder="Search …"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white"
+              className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white border-0 focus-visible:ring-0 focus-visible:ring-offset-0 h-auto"
             />
-            <button
+            <Button
               type="button"
-              className="w-[36px] h-[36px] bg-[#FF8835] rounded-full flex items-center justify-center hover:bg-[#FA791E] transition-colors"
+              className="w-[36px] h-[36px] bg-[#FF8835] rounded-full flex items-center justify-center hover:bg-[#FA791E] transition-colors p-0"
             >
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path
@@ -119,7 +121,7 @@ export default function Header() {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

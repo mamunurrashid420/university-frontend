@@ -47,11 +47,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${merriweather.variable} ${roboto.variable} antialiased overflow-x-hidden`}
       >
+        <Header />
         <div className="min-h-screen bg-white overflow-x-hidden">
-          <Header />
           {children}
-          <Footer />
         </div>
+        <Footer />
       </body>
     </html>
   );

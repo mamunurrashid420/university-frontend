@@ -78,9 +78,9 @@ export default function BenefitsSection() {
   const leftPanel = activeTabData?.leftPanel;
 
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[316px] bg-[#E7F0FD] relative overflow-x-hidden">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[316px] bg-[#E7F0FD] relative overflow-hidden">
       {/* Background Ellipse */}
-      <div className="absolute bottom-[-1446px] left-1/2 -translate-x-1/2 w-[2527px] h-[1756px] bg-[rgba(231,240,253,0.7)] rounded-full" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[600px] bg-[rgba(231,240,253,0.7)] rounded-full opacity-50" />
 
       <div className="max-w-[1280px] mx-auto relative z-10">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
