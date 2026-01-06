@@ -71,13 +71,7 @@ export default function AdmissionForm() {
         </div>
 
         {/* Form Content */}
-        <div className="relative flex flex-col items-center gap-6 p-5 pt-[124px] max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
-          {/* Back Link */}
-          <a href="/" className="absolute left-[22px] -top-[14px] flex flex-row items-center gap-1 cursor-pointer no-underline z-10 w-auto h-auto hover:opacity-70 max-md:left-4 max-md:-top-3 max-sm:left-3 max-sm:-top-2">
-            <ChevronLeft className="w-5 h-5 text-[#4A5568] shrink-0 max-sm:w-4 max-sm:h-4" />
-            <span className="w-auto h-auto font-['Outfit'] font-normal text-base leading-5 text-[#4A5568] max-sm:text-sm">Back</span>
-          </a>
-
+        <div className="relative flex flex-col items-center gap-6 p-5 pt-8 max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
           {/* Form Title */}
           <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3">
             <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5">Online Admission Information Form</h1>
