@@ -94,17 +94,17 @@ export default function AdmissionForm() {
             
             {/* Action Buttons */}
             <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
-              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[203px] border border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-[1.2]">Tuition Fee</span>
-                <span className="block leading-[1.2]">Calculator</span>
+              <Button variant="outline" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[203px] border-2 border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-tight">Tuition Fee</span>
+                <span className="block leading-tight">Calculator</span>
               </Button>
-              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[183px] border border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-[1.2]">Check Tuition</span>
-                <span className="block leading-[1.2]">Fees</span>
+              <Button variant="outline" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[183px] border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-tight">Check Tuition</span>
+                <span className="block leading-tight">Fees</span>
               </Button>
-              <Button variant="outline" className="box-border min-h-8 rounded-md font-['Outfit'] font-medium text-base leading-5 py-1.5 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center whitespace-nowrap w-[233px] border border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                <span className="block leading-[1.2]">Scholarship</span>
-                <span className="block leading-[1.2]">Opportunities</span>
+              <Button variant="outline" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <span className="block leading-tight">Scholarship</span>
+                <span className="block leading-tight">Opportunities</span>
               </Button>
             </div>
           </div>
