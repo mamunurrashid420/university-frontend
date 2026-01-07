@@ -64,7 +64,6 @@ const admissionFormSchema = z.object({
     const num = parseFloat(val);
     return !isNaN(num) && num >= 0 && num <= 5.00;
   }, 'SSC GPA must be between 0.00 and 5.00'),
-  ssc_grade: z.string().max(10, 'SSC grade must not exceed 10 characters').optional().or(z.literal('')),
   ssc_board: z.string().max(100, 'SSC board must not exceed 100 characters').optional().or(z.literal('')),
   ssc_passing_year: z.string().optional().refine((val) => {
     if (!val || val === '') return true;
@@ -79,7 +78,6 @@ const admissionFormSchema = z.object({
     const num = parseFloat(val);
     return !isNaN(num) && num >= 0 && num <= 5.00;
   }, 'HSC GPA must be between 0.00 and 5.00').or(z.literal('')),
-  hsc_grade: z.string().max(10, 'HSC grade must not exceed 10 characters').optional().or(z.literal('')),
   hsc_board: z.string().max(100, 'HSC board must not exceed 100 characters').optional().or(z.literal('')),
   hsc_passing_year: z.string().optional().refine((val) => {
     if (!val || val === '') return true;
@@ -87,15 +85,11 @@ const admissionFormSchema = z.object({
     return !isNaN(year) && year >= 1900 && year <= 2100;
   }, 'Passing year must be between 1900 and 2100').or(z.literal('')),
   // Honors fields (all optional)
-  honors_roll: z.string().max(50, 'Honors roll number must not exceed 50 characters').optional().or(z.literal('')),
-  honors_registration_no: z.string().max(50, 'Honors registration number must not exceed 50 characters').optional().or(z.literal('')),
   honors_gpa: z.string().optional().refine((val) => {
     if (!val || val === '') return true;
     const num = parseFloat(val);
     return !isNaN(num) && num >= 0 && num <= 4.00;
-  }, 'Honors GPA must be between 0.00 and 4.00').or(z.literal('')),
-  honors_grade: z.string().max(50, 'Honors grade must not exceed 50 characters').optional().or(z.literal('')),
-  honors_board: z.string().max(100, 'Honors board must not exceed 100 characters').optional().or(z.literal('')),
+  }, 'Honors CGPA must be between 0.00 and 4.00').or(z.literal('')),
   honors_passing_year: z.string().optional().refine((val) => {
     if (!val || val === '') return true;
     const year = parseInt(val);
@@ -164,20 +158,14 @@ export default function AdmissionForm() {
       ssc_roll: '',
       ssc_registration_no: '',
       ssc_gpa: '',
-      ssc_grade: '',
       ssc_board: '',
       ssc_passing_year: '',
       hsc_roll: '',
       hsc_registration_no: '',
       hsc_gpa: '',
-      hsc_grade: '',
       hsc_board: '',
       hsc_passing_year: '',
-      honors_roll: '',
-      honors_registration_no: '',
       honors_gpa: '',
-      honors_grade: '',
-      honors_board: '',
       honors_passing_year: '',
       honors_institution: '',
     },
@@ -250,7 +238,6 @@ export default function AdmissionForm() {
     if (formData.father_name) submitData.father_name = formData.father_name;
     if (formData.mother_name) submitData.mother_name = formData.mother_name;
     if (formData.assisted_by) submitData.assisted_by = formData.assisted_by;
-    if (formData.ssc_grade) submitData.ssc_grade = formData.ssc_grade;
     if (formData.ssc_board) submitData.ssc_board = formData.ssc_board;
     if (formData.ssc_passing_year) submitData.ssc_passing_year = parseInt(formData.ssc_passing_year);
 
@@ -258,16 +245,11 @@ export default function AdmissionForm() {
     if (formData.hsc_roll) submitData.hsc_roll = formData.hsc_roll;
     if (formData.hsc_registration_no) submitData.hsc_registration_no = formData.hsc_registration_no;
     if (formData.hsc_gpa) submitData.hsc_gpa = parseFloat(formData.hsc_gpa);
-    if (formData.hsc_grade) submitData.hsc_grade = formData.hsc_grade;
     if (formData.hsc_board) submitData.hsc_board = formData.hsc_board;
     if (formData.hsc_passing_year) submitData.hsc_passing_year = parseInt(formData.hsc_passing_year);
 
     // Honors fields (all optional)
-    if (formData.honors_roll) submitData.honors_roll = formData.honors_roll;
-    if (formData.honors_registration_no) submitData.honors_registration_no = formData.honors_registration_no;
     if (formData.honors_gpa) submitData.honors_gpa = parseFloat(formData.honors_gpa);
-    if (formData.honors_grade) submitData.honors_grade = formData.honors_grade;
-    if (formData.honors_board) submitData.honors_board = formData.honors_board;
     if (formData.honors_passing_year) submitData.honors_passing_year = parseInt(formData.honors_passing_year);
     if (formData.honors_institution) submitData.honors_institution = formData.honors_institution;
 
@@ -731,7 +713,9 @@ export default function AdmissionForm() {
                 <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4">SSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span></h3>
                 <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1">
                   <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
+                    <Label className="flex flex-row items-center font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">
+                      Roll Number<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
+                    </Label>
                     <Input
                       type="text"
                       {...registerWithRef('ssc_roll')}
@@ -745,7 +729,9 @@ export default function AdmissionForm() {
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Registration Number</Label>
+                    <Label className="flex flex-row items-center font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">
+                      Registration Number<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
+                    </Label>
                     <Input
                       type="text"
                       {...registerWithRef('ssc_registration_no')}
@@ -759,7 +745,9 @@ export default function AdmissionForm() {
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">GPA</Label>
+                    <Label className="flex flex-row items-center font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">
+                      GPA<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
+                    </Label>
                     <Input
                       type="number"
                       {...registerWithRef('ssc_gpa')}
@@ -772,20 +760,6 @@ export default function AdmissionForm() {
                     {(errors.ssc_gpa || apiErrors.ssc_gpa) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
                         {errors.ssc_gpa?.message || apiErrors.ssc_gpa?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('ssc_grade')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_grade || apiErrors.ssc_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.ssc_grade || apiErrors.ssc_grade) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.ssc_grade?.message || apiErrors.ssc_grade?.[0]}
                       </p>
                     )}
                   </div>
@@ -872,20 +846,6 @@ export default function AdmissionForm() {
                     )}
                   </div>
                   <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('hsc_grade')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_grade || apiErrors.hsc_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.hsc_grade || apiErrors.hsc_grade) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.hsc_grade?.message || apiErrors.hsc_grade?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Board</Label>
                     <Input
                       type="text"
@@ -923,35 +883,7 @@ export default function AdmissionForm() {
                 <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4">Honors/Equivalent/Other</h3>
                 <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1">
                   <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('honors_roll')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_roll || apiErrors.honors_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.honors_roll || apiErrors.honors_roll) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.honors_roll?.message || apiErrors.honors_roll?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Registration Number</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('honors_registration_no')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_registration_no || apiErrors.honors_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.honors_registration_no || apiErrors.honors_registration_no) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.honors_registration_no?.message || apiErrors.honors_registration_no?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">GPA</Label>
+                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">CGPA</Label>
                     <Input
                       type="number"
                       {...registerWithRef('honors_gpa')}
@@ -964,34 +896,6 @@ export default function AdmissionForm() {
                     {(errors.honors_gpa || apiErrors.honors_gpa) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
                         {errors.honors_gpa?.message || apiErrors.honors_gpa?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Grade</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('honors_grade')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_grade || apiErrors.honors_grade ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.honors_grade || apiErrors.honors_grade) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.honors_grade?.message || apiErrors.honors_grade?.[0]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-start gap-2">
-                    <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Board</Label>
-                    <Input
-                      type="text"
-                      {...registerWithRef('honors_board')}
-                      placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_board || apiErrors.honors_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
-                    />
-                    {(errors.honors_board || apiErrors.honors_board) && (
-                      <p className="text-red-500 text-xs mt-1 font-['Outfit']">
-                        {errors.honors_board?.message || apiErrors.honors_board?.[0]}
                       </p>
                     )}
                   </div>
