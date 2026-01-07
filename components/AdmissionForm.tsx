@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import useSWR from 'swr';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -343,8 +344,12 @@ export default function AdmissionForm() {
 
           {/* Admission Open Section */}
           <div className="flex flex-col items-center gap-[1px] z-10 max-[920px]:order-[-1] max-md:gap-0.5">
-            <div className="w-auto max-w-[240px] h-auto font-['Outfit'] font-bold text-[28px] leading-10 text-[#27A239] text-center max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7">ADMISSION OPEN</div>
-            <div className="w-auto max-w-[240px] h-auto font-['Merriweather'] italic font-bold text-xl leading-7 text-center text-[#EE5E11] max-md:text-lg max-sm:text-base">Spring 2026</div>
+            <div className="w-auto max-w-[240px] h-auto font-['Outfit'] font-bold text-[28px] leading-10 text-[#27A239] text-center max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7" style={{
+              animation: 'glow-pulse 2s ease-in-out infinite'
+            }}>ADMISSION OPEN</div>
+            <div className="w-auto max-w-[240px] h-auto font-['Merriweather'] italic font-bold text-xl leading-7 text-center text-[#EE5E11] max-md:text-lg max-sm:text-base" style={{
+              animation: 'glow-pulse-orange 2s ease-in-out infinite 0.5s'
+            }}>Spring 2026</div>
           </div>
 
           {/* Scholarship Section */}
@@ -396,10 +401,12 @@ export default function AdmissionForm() {
                   <span className="block leading-tight">Tuition Fee</span>
                   <span className="block leading-tight">Calculator</span>
                 </Button>
-                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[183px] border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
-                  <span className="block leading-tight">Check Tuition</span>
-                  <span className="block leading-tight">Fees</span>
-                </Button>
+                <Link href="/admission/tuition-fees" className="w-[183px] max-[920px]:w-full">
+                  <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-full border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                    <span className="block leading-tight">Check Tuition</span>
+                    <span className="block leading-tight">Fees</span>
+                  </Button>
+                </Link>
                 <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
                   <span className="block leading-tight">Scholarship</span>
                   <span className="block leading-tight">Opportunities</span>

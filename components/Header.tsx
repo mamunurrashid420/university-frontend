@@ -1,12 +1,15 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
+  const pathname = usePathname();
 
   const navItems = [
     'Home',
@@ -28,7 +31,7 @@ export default function Header() {
       <div className="w-full h-auto min-h-[108px] bg-[#0A418F] relative py-4 overflow-x-hidden max-w-full">
         <div className="container-custom h-full flex flex-col lg:flex-row items-center justify-between gap-4 relative">
           {/* Logo and Title */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <Link href="/" className="flex items-center gap-2 md:gap-4 hover:opacity-90 transition-opacity cursor-pointer">
             <div className="w-12 h-12 md:w-[76px] md:h-[76px] rounded-full bg-white flex items-center justify-center shrink-0">
               <Image
                 src="/images/logo/logo.jpg"
@@ -44,7 +47,7 @@ export default function Header() {
             <h1 className="text-white font-bold text-xs md:text-lg leading-tight md:leading-7 max-w-[180px] md:w-[180px] font-serif">
               Apparel Institute of Fashion & Technology
             </h1>
-          </div>
+          </Link>
 
           {/* Contact Info */}
           <div className="hidden lg:flex flex-col gap-2 text-white text-[11px]">
@@ -130,15 +133,41 @@ export default function Header() {
       <nav className="w-full min-h-[72px] bg-white overflow-x-hidden max-w-full">
         <div className="container-custom h-full flex items-center overflow-x-hidden">
           <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2">
-            {navItems.map((item, index) => (
-              <a
-                key={index}
-                href={`#${item.toLowerCase()}`}
-                className="px-2 md:px-3 xl:px-[18px] py-2 md:py-3 text-xs md:text-sm xl:text-base font-medium text-black hover:text-[#116DEE] transition-colors whitespace-nowrap"
-              >
-                {item}
-              </a>
-            ))}
+            {navItems.map((item, index) => {
+              const isAdmission = item.toLowerCase() === 'admission';
+              const isActive = isAdmission && pathname === '/admission';
+              const href = isAdmission ? '/admission' : `#${item.toLowerCase()}`;
+              
+              return (
+                <Link
+                  key={index}
+                  href={href}
+                  className={`relative px-2 md:px-3 xl:px-[18px] py-2 md:py-3 text-xs md:text-sm xl:text-base font-medium whitespace-nowrap transition-all duration-300 ${
+                    isActive
+                      ? 'text-white font-bold scale-110 z-10'
+                      : isAdmission
+                      ? 'text-white font-bold z-10'
+                      : 'text-black hover:text-[#116DEE]'
+                  }`}
+                >
+                  {isAdmission && (
+                    <>
+                      {/* Animated background glow with stronger pulse */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-[#FF8835] via-[#FF6B00] to-[#FF8835] rounded-lg opacity-90 animate-pulse"></span>
+                      {/* Outer glowing ring */}
+                      <span className="absolute -inset-1 bg-[#FF8835] rounded-lg opacity-40 blur-sm animate-pulse"></span>
+                      {/* Pulsing border */}
+                      <span className="absolute inset-0 border-2 border-[#FF8835] rounded-lg animate-ping opacity-75"></span>
+                      {/* Shimmer effect */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-lg animate-[shimmer_2s_infinite]"></span>
+                      {/* Scale animation for extra emphasis */}
+                      <span className="absolute inset-0 bg-[#FF8835] rounded-lg opacity-20 animate-[pulse_1.5s_ease-in-out_infinite]"></span>
+                    </>
+                  )}
+                  <span className="relative z-10">{item}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
