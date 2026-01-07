@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { ArrowLeft, Mail, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import TuitionFeesTable from '@/components/TuitionFeesTable';
 
 export default function TuitionFeesPage() {
@@ -39,11 +38,7 @@ export default function TuitionFeesPage() {
       {/* Announcement Section */}
       <div className="relative w-full max-w-[930px] mt-10 mx-auto flex flex-col items-center gap-4 z-10 px-5 max-[1920px]:w-[90%] max-md:mt-5 max-md:w-[95%] max-md:px-4">
         <div className="w-full flex flex-row items-center gap-4 max-md:flex-col max-md:items-start max-md:gap-3">
-          <Link href="/admission" className="flex flex-row items-center gap-1 no-underline shrink-0 hover:opacity-70 max-md:self-start">
-            <ArrowLeft className="w-5 h-5 -rotate-90 text-[#4A5568] shrink-0" />
-            <span className="font-['Outfit'] font-normal text-base leading-5 text-[#4A5568] max-md:text-sm">Back</span>
-          </Link>
-          <h2 className="flex-1 h-auto min-h-8 font-['Outfit'] font-semibold text-2xl leading-8 tracking-[0.04em] text-black text-center m-0 max-[1920px]:w-full max-[1920px]:text-xl max-md:text-left max-md:w-full max-md:text-lg max-md:leading-[1.4] max-md:tracking-normal">
+          <h2 className="flex-1 h-auto min-h-8 font-['Outfit'] font-semibold text-2xl leading-8 tracking-[0.04em] text-black text-center m-0 whitespace-nowrap max-[1920px]:w-full max-[1920px]:text-xl max-md:text-left max-md:w-full max-md:text-lg max-md:leading-[1.4] max-md:tracking-normal max-md:whitespace-normal">
             Admission Open for Education and Admission Fair Spring 2026 (January - April)
           </h2>
         </div>
