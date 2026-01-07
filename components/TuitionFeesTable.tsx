@@ -256,10 +256,20 @@ const getSchoolColor = (schoolName: string): { bg: string; text: string } => {
 };
 
 export default function TuitionFeesTable() {
+  const hasColumnData = (programs: Program[], field: keyof Program): boolean => {
+    return programs.some(program => program[field] !== undefined && program[field] !== null);
+  };
+
   return (
     <div className="w-full max-w-[1920px] mx-auto py-10 px-5 bg-white max-md:py-5 max-md:px-2.5 max-sm:py-4 max-sm:px-2">
       {tuitionData.map((school, schoolIndex) => {
         const schoolColors = getSchoolColor(school.name);
+        const showDuration = hasColumnData(school.programs, 'duration');
+        const showSemester = hasColumnData(school.programs, 'totalSemester');
+        const showCredits = hasColumnData(school.programs, 'totalCredit');
+        const showRegistrationFee = hasColumnData(school.programs, 'registrationFee');
+        const showFormFillUpFee = hasColumnData(school.programs, 'formFillUpFee');
+        
         return (
           <div key={schoolIndex} className="mb-[60px] last:mb-0 max-md:mb-8 max-sm:mb-6">
             <div 
@@ -278,12 +288,12 @@ export default function TuitionFeesTable() {
               <thead className="bg-[#072C5F] text-white">
                 <tr>
                   <th className="min-w-[280px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-left max-[1200px]:min-w-[240px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[200px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Program Name</th>
-                  <th className="min-w-[140px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Duration</th>
-                  <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Semester</th>
-                  <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Credits</th>
+                  {showDuration && <th className="min-w-[140px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Duration</th>}
+                  {showSemester && <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Semester</th>}
+                  {showCredits && <th className="min-w-[100px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-center max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Credits</th>}
                   <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Admission Fee</th>
-                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Registration Fee</th>
-                  <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Form Fill Up Fee</th>
+                  {showRegistrationFee && <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Registration Fee</th>}
+                  {showFormFillUpFee && <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Form Fill Up Fee</th>}
                   <th className="min-w-[120px] font-semibold text-[13px] leading-[18px] whitespace-nowrap sticky top-0 z-10 py-4 px-3 text-right font-['Roboto'] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">Tuition Fee</th>
                 </tr>
               </thead>
@@ -291,12 +301,12 @@ export default function TuitionFeesTable() {
                 {school.programs.map((program, programIndex) => (
                   <tr key={programIndex} className="border-b border-[#E5E7EB] transition-colors hover:bg-[#F5F7FA] last:border-b-0">
                     <td className="min-w-[280px] font-medium text-left py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[240px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[200px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.name}</td>
-                    <td className="min-w-[140px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.duration || '-'}</td>
-                    <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalSemester || '-'}</td>
-                    <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalCredit || '-'}</td>
+                    {showDuration && <td className="min-w-[140px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[120px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[100px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.duration || '-'}</td>}
+                    {showSemester && <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalSemester || '-'}</td>}
+                    {showCredits && <td className="min-w-[100px] text-center py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[80px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[70px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.totalCredit || '-'}</td>}
                     <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.admissionFee)}</td>
-                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.registrationFee ? formatCurrency(program.registrationFee) : '-'}</td>
-                    <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.formFillUpFee ? formatCurrency(program.formFillUpFee) + ' (Per Semester)' : '-'}</td>
+                    {showRegistrationFee && <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.registrationFee ? formatCurrency(program.registrationFee) : '-'}</td>}
+                    {showFormFillUpFee && <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{program.formFillUpFee ? formatCurrency(program.formFillUpFee) + ' (Per Semester)' : '-'}</td>}
                     <td className="min-w-[120px] text-right font-['Roboto'] py-3.5 px-3 text-[13px] leading-[18px] text-[#1E2021] max-[1200px]:min-w-[100px] max-[1200px]:py-3 max-[1200px]:px-2 max-[1200px]:text-xs max-md:min-w-[90px] max-md:py-2.5 max-md:px-1.5 max-md:text-[11px]">{formatCurrency(program.tuitionFee)}</td>
                   </tr>
                 ))}
