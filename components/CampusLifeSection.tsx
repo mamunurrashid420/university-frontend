@@ -28,14 +28,14 @@ const campusItems = [
 
 export default function CampusLifeSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[371px] bg-white overflow-x-hidden">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[371px] bg-white overflow-x-hidden">
       <div className="max-w-[1179px] mx-auto">
         {/* Header */}
         <div className="text-center mb-6 md:mb-8">
           <h2 className="text-2xl md:text-3xl lg:text-[32px] leading-tight md:leading-10 font-bold text-black mb-2 font-serif">
             Campus Life
           </h2>
-          <p className="text-sm md:text-[15px] leading-6 text-[#666666]">
+          <p className="text-sm md:text-[15px] leading-5 sm:leading-6 text-[#666666]">
             Building a vibrant community of creative and accomplished people
           </p>
         </div>
@@ -43,8 +43,8 @@ export default function CampusLifeSection() {
         {/* Gallery */}
         <div className="flex flex-col md:flex-row gap-4 md:gap-6">
           {campusItems.map((item, index) => (
-            <div key={index} className="flex-1 flex flex-col gap-5 p-2">
-              <div className="relative w-full h-[244px] rounded">
+            <div key={index} className="flex-1 flex flex-col gap-4 sm:gap-5 p-2">
+              <div className="relative w-full h-[200px] sm:h-[244px] rounded">
                 <Image
                   src={item.image}
                   alt={item.title}

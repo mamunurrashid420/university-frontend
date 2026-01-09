@@ -4,14 +4,14 @@ import Image from 'next/image';
 
 export default function AboutSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[320px] bg-white overflow-x-hidden">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[320px] bg-white overflow-x-hidden">
       <div className="max-w-[1280px] mx-auto">
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-[100px]">
           {/* Images Group: about-1 on left, about-2 and about-3 on right */}
-          <div className="flex gap-0 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 w-full lg:w-auto">
             {/* Left: about-1 Image */}
-            <div className="w-full lg:w-auto">
-              <div className="relative w-full lg:w-[327px] h-[300px] md:h-[400px] lg:h-[554px]">
+            <div className="w-full sm:w-1/2 lg:w-auto">
+              <div className="relative w-full lg:w-[327px] h-[250px] sm:h-[300px] md:h-[400px] lg:h-[554px]">
                 <Image
                   src="/images/about/about-1.jpg"
                   alt="AIFT Building"
@@ -26,9 +26,9 @@ export default function AboutSection() {
             </div>
 
             {/* Right: about-2 and about-3 Images Collage */}
-            <div className="w-full lg:w-auto">
+            <div className="w-full sm:w-1/2 lg:w-auto">
               <div className="flex flex-col w-full lg:w-[327px]">
-                <div className="relative w-full h-[150px] md:h-[200px] lg:h-[277px]">
+                <div className="relative w-full h-[125px] sm:h-[150px] md:h-[200px] lg:h-[277px]">
                   <Image
                     src="/images/about/about-2.jpg"
                     alt="Student"
@@ -40,7 +40,7 @@ export default function AboutSection() {
                     }}
                   />
                 </div>
-                <div className="relative w-full h-[150px] md:h-[200px] lg:h-[277px]">
+                <div className="relative w-full h-[125px] sm:h-[150px] md:h-[200px] lg:h-[277px]">
                   <Image
                     src="/images/about/about-3.jpg"
                     alt="Classroom"
@@ -66,10 +66,10 @@ export default function AboutSection() {
                   </span>
                 </div>
                 <h2 className="text-2xl md:text-3xl lg:text-[40px] leading-tight md:leading-[52px] font-bold text-[#021E40] font-serif">
-                History of <br />
+                History of <br className="hidden sm:block" />
                 Apparel Institute of Fashion & Technology
                 </h2>
-                <p className="text-base leading-8 text-[#696868]">
+                <p className="text-sm sm:text-base leading-7 sm:leading-8 text-[#696868]">
                   A well-organized file structure can save time and make your team
                   more efficient. Learn about some of our favorite organizational
                   workflows, including tips on where to start. A well-organized
@@ -78,7 +78,7 @@ export default function AboutSection() {
                   including tips on where to start.
                 </p>
               </div>
-              <button className="w-fit px-8 py-[18px] bg-[#116DEE] rounded-[5px] flex items-center gap-2.5 text-white text-lg font-normal hover:bg-[#0A418F] transition-colors">
+              <button className="w-full sm:w-fit px-6 sm:px-8 py-3 sm:py-[18px] bg-[#116DEE] rounded-[5px] flex items-center justify-center gap-2.5 text-white text-base sm:text-lg font-normal hover:bg-[#0A418F] transition-colors">
                 <span>Know About Us</span>
                 <svg
                   width="20"

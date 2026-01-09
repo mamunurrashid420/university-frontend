@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
 const rankings = [
@@ -28,7 +28,24 @@ const rankings = [
 
 export default function RankingsSection() {
   const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 4;
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth < 640) {
+        setItemsPerPage(2);
+      } else if (window.innerWidth < 1024) {
+        setItemsPerPage(3);
+      } else {
+        setItemsPerPage(4);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, []);
+
   const totalPages = Math.ceil(rankings.length / itemsPerPage);
 
   const goToPage = (page: number) => {
@@ -36,10 +53,10 @@ export default function RankingsSection() {
   };
 
   return (
-    <section className="w-full min-h-[324px] py-12 md:py-20 px-4 md:px-6 lg:px-[371px] bg-[#F5F7FA] flex items-center overflow-x-hidden">
+    <section className="w-full min-h-[324px] py-12 md:py-20 px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[371px] bg-[#F5F7FA] flex items-center overflow-x-hidden">
       <div className="max-w-[1179px] mx-auto w-full">
         <div className="flex flex-col gap-1">
-          <h3 className="text-xl md:text-2xl leading-8 text-[#0B499D] mb-4">
+          <h3 className="text-lg sm:text-xl md:text-2xl leading-6 sm:leading-8 text-[#0B499D] mb-4">
             Recognitions and Rankings at a Glance
           </h3>
 
@@ -51,7 +68,7 @@ export default function RankingsSection() {
               {Array.from({ length: totalPages }).map((_, pageIndex) => (
                 <div
                   key={pageIndex}
-                  className="min-w-full flex gap-4 md:gap-6"
+                  className="min-w-full flex gap-2 sm:gap-4 md:gap-6"
                 >
                   {rankings
                     .slice(
@@ -61,7 +78,7 @@ export default function RankingsSection() {
                     .map((ranking) => (
                       <div
                         key={ranking.id}
-                        className="flex-1 h-[124px] md:h-[150px] rounded-[10px] p-3 md:p-4 flex items-center justify-center"
+                        className="flex-1 min-w-[120px] sm:min-w-0 h-[100px] sm:h-[124px] md:h-[150px] rounded-[10px] p-2 sm:p-3 md:p-4 flex items-center justify-center"
                       >
                         <div className="relative w-full h-full">
                           <Image

@@ -96,7 +96,7 @@ export default function Header() {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100vw-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10">
+          <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] xl:w-[468px] max-w-[calc(100vw-2rem)] h-[48px] bg-[#001751] rounded-[24px] items-center px-4 xl:px-6 z-10 pointer-events-auto">
             <Input
               type="text"
               placeholder="Search …"
@@ -131,8 +131,8 @@ export default function Header() {
 
       {/* Navigation Bar */}
       <nav className="w-full min-h-[72px] bg-white overflow-x-hidden max-w-full">
-        <div className="container-custom h-full flex items-center overflow-x-hidden">
-          <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2">
+        <div className="container-custom h-full flex items-center overflow-x-auto">
+          <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2 min-w-max xl:min-w-0">
             {navItems.map((item, index) => {
               const isAdmission = item.toLowerCase() === 'admission';
               const isActive = isAdmission && pathname === '/admission';

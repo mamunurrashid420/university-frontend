@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function FeaturesSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-[316px] bg-white overflow-x-hidden">
+    <section className="w-full py-12 md:py-20 lg:py-[100px] px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[316px] bg-white overflow-x-hidden">
       <div className="max-w-[1290px] mx-auto flex flex-col lg:flex-row gap-4 md:gap-6">
         {/* Scholarship Card */}
         <div className="w-full lg:w-[322.5px] flex flex-col flex-shrink-0">
@@ -114,7 +114,7 @@ export default function FeaturesSection() {
         </div>
 
         {/* Admission Card */}
-        <div className="w-full lg:w-[645px] h-[400px] md:h-[500px] lg:h-auto relative">
+        <div className="w-full lg:w-[645px] h-[350px] sm:h-[400px] md:h-[500px] lg:h-auto relative">
           <Image
             src="/images/events/admission.jpg"
             alt="Admission"
@@ -126,11 +126,11 @@ export default function FeaturesSection() {
             }}
           />
           <div className="absolute inset-0 bg-[#1D3F6B] opacity-40" />
-          <div className="absolute inset-0 flex flex-col justify-center items-start p-6 md:p-12 lg:p-[100px]">
-            <h3 className="text-2xl md:text-3xl lg:text-[40.5px] leading-tight md:leading-[52px] font-bold text-white mb-8 font-serif max-w-[427px]">
+          <div className="absolute inset-0 flex flex-col justify-center items-start p-4 sm:p-6 md:p-12 lg:p-[100px]">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-[40.5px] leading-tight md:leading-[52px] font-bold text-white mb-4 sm:mb-6 md:mb-8 font-serif max-w-full lg:max-w-[427px]">
               Access An Affordable Education & Pursue Your Passion.
             </h3>
-            <button className="px-[35px] py-4 bg-[#116DEE] rounded text-white text-base font-semibold flex items-center hover:bg-[#0A418F] transition-colors">
+            <button className="px-6 sm:px-[35px] py-3 sm:py-4 bg-[#116DEE] rounded text-white text-sm sm:text-base font-semibold flex items-center hover:bg-[#0A418F] transition-colors">
               <span>Apply To Admission</span>
               <svg width="23" height="15" viewBox="0 0 23 15" fill="none">
                 <path

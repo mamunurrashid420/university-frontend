@@ -71,7 +71,7 @@ export default function HeroSlider() {
 
       {/* Announcement Banner */}
       <div className="absolute bottom-0 left-0 right-0 min-h-[52px] bg-[#072C5F] flex items-center justify-center py-2">
-        <p className="text-[#FDCC2D] text-xs md:text-[15px] font-semibold text-center px-4 break-words">
+        <p className="text-[#FDCC2D] text-[10px] sm:text-xs md:text-[15px] font-semibold text-center px-2 sm:px-4 break-words">
           🎓 Admission Open | Spring 2026 | Up to 100% Scholarships | Programs:
           CSE, EEE, Civil, BBA, English, Law, Fashion Design & Technology,
           Textile, Bangla, Mathematics, Islamic Studies, Physics.

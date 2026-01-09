@@ -33,9 +33,9 @@ const stats = [
 
 export default function StatsSection() {
   return (
-    <section className="relative w-full h-[380px] md:h-[420px] flex items-start py-5 bg-white overflow-hidden">
+    <section className="relative w-full h-auto min-h-[380px] md:h-[420px] flex items-start py-5 bg-white overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-[380px]">
+      <div className="absolute inset-0 w-full h-full min-h-[380px] md:h-[420px]">
         <Image
           src="/images/about/stats-bg.jpg"
           alt="Background"
@@ -53,9 +53,9 @@ export default function StatsSection() {
       </div>
 
       {/* Content Container */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center">
-        <div className="w-full max-w-[1920px] mx-auto px-4 md:px-6 lg:px-[375px]">
-          <div className="relative h-[297px] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
+      <div className="relative z-10 w-full h-full flex items-center justify-center py-8 md:py-0">
+        <div className="w-full max-w-[1920px] mx-auto px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[375px]">
+          <div className="relative min-h-[297px] flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
             {stats.map((stat, index) => {
               const IconComponent = stat.icon;
               const isLast = index === stats.length - 1;
@@ -71,11 +71,11 @@ export default function StatsSection() {
                   )}
 
                   {/* Icon - 80x80px as per Figma */}
-                  <div className="mb-[29px] flex items-center justify-center">
+                  <div className="mb-4 sm:mb-[29px] flex items-center justify-center">
                     <IconComponent
-                      size={80}
+                      size={60}
                       strokeWidth={2}
-                      className="text-white"
+                      className="text-white sm:w-20 sm:h-20"
                       stroke="currentColor"
                       fill="none"
                     />
@@ -83,12 +83,10 @@ export default function StatsSection() {
 
                   {/* Number - 28px, font-weight 600, Roboto */}
                   <div
-                    className="text-[28px] leading-[28px] text-white mb-[8px] text-center whitespace-nowrap"
+                    className="text-xl sm:text-2xl md:text-[28px] leading-tight sm:leading-[28px] text-white mb-2 sm:mb-[8px] text-center whitespace-nowrap"
                     style={{
                       fontFamily: 'Roboto, sans-serif',
                       fontWeight: 600,
-                      fontSize: '28px',
-                      lineHeight: '28px',
                     }}
                   >
                     {stat.number}
@@ -96,12 +94,10 @@ export default function StatsSection() {
 
                   {/* Label - 18px, font-weight 400, Roboto */}
                   <div
-                    className="text-[18px] leading-[30px] text-white text-center"
+                    className="text-sm sm:text-base md:text-[18px] leading-6 sm:leading-[30px] text-white text-center"
                     style={{
                       fontFamily: 'Roboto, sans-serif',
                       fontWeight: 400,
-                      fontSize: '18px',
-                      lineHeight: '30px',
                     }}
                   >
                     {stat.label}

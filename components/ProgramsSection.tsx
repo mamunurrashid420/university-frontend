@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function ProgramsSection() {
   return (
-    <section className="w-full py-12 md:py-20 lg:py-[108px] px-4 md:px-6 lg:px-[320px] bg-white overflow-x-hidden">
+    <section className="w-full py-12 md:py-20 lg:py-[108px] px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[320px] bg-white overflow-x-hidden">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-center gap-8 lg:gap-[54px]">
         {/* Left: Tuition Info */}
         <div className="flex-1 max-w-full lg:max-w-[386px]">
@@ -16,13 +16,13 @@ export default function ProgramsSection() {
               <h2 className="text-2xl md:text-3xl lg:text-[42px] leading-tight md:leading-[52px] font-bold text-[#021E40] font-serif">
                 Big Opportunities, Manageable Costs
               </h2>
-              <p className="text-base leading-7 text-[#696868]">
+              <p className="text-sm sm:text-base leading-6 sm:leading-7 text-[#696868]">
                 At AIFT University, we are dedicated to offering an affordable
                 education while maintaining academic excellence, ensuring
                 opportunities for students from all walks of life.
               </p>
             </div>
-            <button className="w-fit px-8 py-[18px] bg-[#116DEE] rounded-[5px] flex items-center gap-2.5 text-white text-lg font-normal hover:bg-[#0A418F] transition-colors">
+            <button className="w-full sm:w-fit px-6 sm:px-8 py-3 sm:py-[18px] bg-[#116DEE] rounded-[5px] flex items-center justify-center gap-2.5 text-white text-base sm:text-lg font-normal hover:bg-[#0A418F] transition-colors">
               <span>View Details</span>
               <svg
                 width="20"
@@ -46,7 +46,7 @@ export default function ProgramsSection() {
         {/* Right: Programs Cards */}
         <div className="flex flex-col md:flex-row gap-4 md:gap-8 w-full lg:w-auto">
           {/* Undergraduate Programs */}
-          <div className="w-full md:w-[404px] min-h-[400px] bg-[#FA791E] p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+          <div className="w-full md:w-[404px] min-h-[350px] sm:min-h-[400px] bg-[#FA791E] p-6 md:p-10 flex flex-col gap-6 md:gap-8">
             <h3 className="text-[23.5px] leading-[31px] font-bold text-white font-serif">
               Undergraduate Programs
             </h3>
@@ -101,7 +101,7 @@ export default function ProgramsSection() {
           </div>
 
           {/* Postgraduate Programs */}
-          <div className="w-full md:w-[404px] min-h-[400px] bg-[#0A418F] p-6 md:p-10 flex flex-col gap-6 md:gap-8">
+          <div className="w-full md:w-[404px] min-h-[350px] sm:min-h-[400px] bg-[#0A418F] p-6 md:p-10 flex flex-col gap-6 md:gap-8">
             <h3 className="text-[23.5px] leading-[31px] font-bold text-white font-serif">
               Postgraduate Programs
             </h3>

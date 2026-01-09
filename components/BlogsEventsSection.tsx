@@ -40,24 +40,24 @@ export default function BlogsEventsSection() {
   };
 
   return (
-    <section className="w-full py-12 md:py-16 lg:py-[60px] px-4 md:px-6 lg:px-[240px] bg-white overflow-x-hidden">
+    <section className="w-full py-12 md:py-16 lg:py-[60px] px-4 md:px-6 lg:px-8 xl:px-16 2xl:px-[240px] bg-white overflow-x-hidden">
       <div className="max-w-[1441px] mx-auto">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-[32px] leading-tight md:leading-10 font-bold text-black mb-2 font-serif">
             Blogs & Events
           </h2>
-          <p className="text-sm md:text-[15px] leading-6 text-[#666666]">
+          <p className="text-sm md:text-[15px] leading-5 sm:leading-6 text-[#666666]">
             Building a vibrant community of creative and accomplished people
           </p>
         </div>
 
         {/* Content Grid */}
-        <div className="bg-gradient-to-br from-white to-[#E7F0FD] rounded-2xl p-6 md:p-12 lg:p-[68px_80px_40px]">
+        <div className="bg-gradient-to-br from-white to-[#E7F0FD] rounded-2xl p-4 sm:p-6 md:p-12 lg:p-[68px_80px_40px]">
           <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
             {/* Blog Post */}
             <div className="w-full lg:w-[400px] flex flex-col gap-4 md:gap-6">
-              <div className="relative w-full h-[212px] rounded">
+              <div className="relative w-full h-[180px] sm:h-[212px] rounded">
                 <Image
                   src="/images/events/blog.jpg"
                   alt="Blog Post"
@@ -79,7 +79,7 @@ export default function BlogsEventsSection() {
                   $1 billion goal, the campaign is expanding U of T's global
                   leadership capacity.
                 </p>
-                <Button className="w-fit px-8 py-[18px] bg-[#116DEE] rounded-[5px] flex items-center gap-2.5 text-white text-lg font-normal hover:bg-[#0A418F] transition-colors">
+                <Button className="w-full sm:w-fit px-6 sm:px-8 py-3 sm:py-[18px] bg-[#116DEE] rounded-[5px] flex items-center justify-center gap-2.5 text-white text-base sm:text-lg font-normal hover:bg-[#0A418F] transition-colors">
                   <span>Share your Idea</span>
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -95,32 +95,32 @@ export default function BlogsEventsSection() {
 
             {/* Upcoming Events */}
             <div className="w-full lg:w-[420px] flex flex-col">
-              <h3 className="text-[22px] leading-[26px] font-bold text-[#182847] mb-6">
+              <h3 className="text-lg sm:text-[22px] leading-6 sm:leading-[26px] font-bold text-[#182847] mb-4 sm:mb-6">
                 Upcoming Events
               </h3>
-              <div className="flex flex-col gap-5 mb-6">
+              <div className="flex flex-col gap-4 sm:gap-5 mb-4 sm:mb-6">
                 {events.map((event, index) => (
-                  <div key={index} className="flex gap-[18px]">
-                    <div className="w-10 flex flex-col items-center">
-                      <div className="text-[34px] leading-[34px] font-bold text-[#5076BD]">
+                  <div key={index} className="flex gap-3 sm:gap-[18px]">
+                    <div className="w-8 sm:w-10 flex flex-col items-center shrink-0">
+                      <div className="text-2xl sm:text-[34px] leading-tight sm:leading-[34px] font-bold text-[#5076BD]">
                         {event.date}
                       </div>
-                      <div className="text-base leading-[27px] font-bold text-[#152647] uppercase">
+                      <div className="text-sm sm:text-base leading-5 sm:leading-[27px] font-bold text-[#152647] uppercase">
                         {event.month}
                       </div>
                     </div>
-                    <div className="flex-1 flex flex-col gap-3">
-                      <h4 className="text-lg leading-[22px] font-bold text-[#182847]">
+                    <div className="flex-1 flex flex-col gap-2 sm:gap-3">
+                      <h4 className="text-base sm:text-lg leading-5 sm:leading-[22px] font-bold text-[#182847]">
                         {event.title}
                       </h4>
-                      <div className="flex gap-[18px]">
-                        <div className="flex items-center gap-2.5">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-[18px]">
+                        <div className="flex items-center gap-2">
                           <svg
-                            width="13"
-                            height="13"
+                            width="12"
+                            height="12"
                             viewBox="0 0 13 13"
                             fill="none"
-                            className="transform rotate-180"
+                            className="transform rotate-180 shrink-0"
                           >
                             <path
                               d="M6.5 1V12M1 6.5H12"
@@ -129,17 +129,17 @@ export default function BlogsEventsSection() {
                               strokeLinecap="round"
                             />
                           </svg>
-                          <span className="text-[13px] leading-[22px] text-[#5076BD]">
+                          <span className="text-xs sm:text-[13px] leading-5 sm:leading-[22px] text-[#5076BD]">
                             {event.time}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2.5">
+                        <div className="flex items-center gap-2">
                           <svg
-                            width="13"
-                            height="13"
+                            width="12"
+                            height="12"
                             viewBox="0 0 13 13"
                             fill="none"
-                            className="transform rotate-180"
+                            className="transform rotate-180 shrink-0"
                           >
                             <path
                               d="M6.5 1L11.5 6.5L6.5 12M1 6.5H11.5"
@@ -149,7 +149,7 @@ export default function BlogsEventsSection() {
                               strokeLinejoin="round"
                             />
                           </svg>
-                          <span className="text-[13px] leading-[22px] text-[#5076BD]">
+                          <span className="text-xs sm:text-[13px] leading-5 sm:leading-[22px] text-[#5076BD]">
                             {event.location}
                           </span>
                         </div>
@@ -182,7 +182,7 @@ export default function BlogsEventsSection() {
             </div>
 
             {/* Newsletter */}
-            <div className="w-full lg:w-[420px] h-[400px] md:h-[500px] lg:h-auto relative">
+            <div className="w-full lg:w-[420px] h-[350px] sm:h-[400px] md:h-[500px] lg:h-auto relative">
               <Image
                 src="/images/events/newsletter.jpg"
                 alt="Newsletter"
@@ -193,8 +193,8 @@ export default function BlogsEventsSection() {
                   target.style.backgroundColor = '#0A418F';
                 }}
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-5">
-                <div className="w-[78px] h-[60px] mb-10">
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-5">
+                <div className="w-16 h-12 sm:w-[78px] sm:h-[60px] mb-6 sm:mb-10">
                   <Image
                     src="/images/icons/envelope.png"
                     alt="Envelope"
@@ -206,27 +206,27 @@ export default function BlogsEventsSection() {
                     }}
                   />
                 </div>
-                <h3 className="text-xl leading-6 font-bold text-white mb-2 text-center">
+                <h3 className="text-lg sm:text-xl leading-5 sm:leading-6 font-bold text-white mb-2 text-center">
                   Subscribe To Newsletter
                 </h3>
-                <p className="text-base leading-[27px] text-[#96AAD3] mb-6 text-center">
+                <p className="text-sm sm:text-base leading-6 sm:leading-[27px] text-[#96AAD3] mb-4 sm:mb-6 text-center">
                   Get updates to news & events
                 </p>
                 <form
                   onSubmit={handleSubscribe}
-                  className="w-full max-w-[330px] flex flex-col gap-4"
+                  className="w-full max-w-[330px] flex flex-col gap-3 sm:gap-4"
                 >
                   <Input
                     type="email"
                     placeholder="Your Email Address"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full h-[58px] px-5 bg-[#1A2742] border border-[#1A2742] text-white placeholder:text-[#94A8D1] outline-none rounded focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-[#1A2742]"
+                    className="w-full h-[50px] sm:h-[58px] px-4 sm:px-5 bg-[#1A2742] border border-[#1A2742] text-white placeholder:text-[#94A8D1] outline-none rounded focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-[#1A2742] text-sm sm:text-base"
                     required
                   />
                   <Button
                     type="submit"
-                    className="w-full h-[54px] bg-[#408AF2] text-white text-[15px] font-bold rounded hover:bg-[#116DEE] transition-colors"
+                    className="w-full h-[48px] sm:h-[54px] bg-[#408AF2] text-white text-sm sm:text-[15px] font-bold rounded hover:bg-[#116DEE] transition-colors"
                   >
                     Subscribe
                   </Button>
