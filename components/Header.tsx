@@ -12,17 +12,17 @@ export default function Header() {
   const pathname = usePathname();
 
   const navItems = [
-    'Home',
-    'About',
-    'Academic',
-    'Department',
-    'Admission',
-    'Administration',
-    'Teachers',
-    'Gallery',
-    'Alumni',
-    'Career',
-    'Convocation',
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '#about' },
+    { label: 'Academic', path: '#academic' },
+    { label: 'Department', path: '#department' },
+    { label: 'Admission', path: '/admission' },
+    { label: 'Administration', path: '#administration' },
+    { label: 'Teachers', path: '#teachers' },
+    { label: 'Gallery', path: '#gallery' },
+    { label: 'Alumni', path: '#alumni' },
+    { label: 'Career', path: '#career' },
+    { label: 'Convocation', path: '#convocation' },
   ];
 
   return (
@@ -131,20 +131,19 @@ export default function Header() {
 
       {/* Navigation Bar */}
       <nav className="w-full min-h-[72px] bg-white overflow-x-hidden max-w-full">
-        <div className="container-custom h-full flex items-center overflow-x-auto">
-          <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2 min-w-max xl:min-w-0">
+        <div className="container-custom h-full flex items-center overflow-x-hidden">
+          <div className="flex flex-wrap xl:flex-nowrap items-center gap-1 md:gap-2 xl:gap-3 py-2 w-full">
             {navItems.map((item, index) => {
-              const isAdmission = item.toLowerCase() === 'admission';
-              const isActive = isAdmission && pathname === '/admission';
-              const href = isAdmission ? '/admission' : `#${item.toLowerCase()}`;
+              const isAdmission = item.path === '/admission';
+              const isActive = pathname === item.path;
               
               return (
                 <Link
                   key={index}
-                  href={href}
-                  className={`relative px-2 md:px-3 xl:px-[18px] py-2 md:py-3 text-xs md:text-sm xl:text-base font-medium whitespace-nowrap transition-all duration-300 ${
+                  href={item.path}
+                  className={`relative px-2 md:px-3 xl:px-[18px] py-2 md:py-3 text-xs md:text-sm xl:text-base font-medium whitespace-nowrap transition-all duration-300 overflow-hidden ${
                     isActive
-                      ? 'text-white font-bold scale-110 z-10'
+                      ? 'text-white font-bold z-10'
                       : isAdmission
                       ? 'text-white font-bold z-10'
                       : 'text-black hover:text-[#116DEE]'
@@ -154,17 +153,15 @@ export default function Header() {
                     <>
                       {/* Animated background glow with stronger pulse */}
                       <span className="absolute inset-0 bg-gradient-to-r from-[#FF8835] via-[#FF6B00] to-[#FF8835] rounded-lg opacity-90 animate-pulse"></span>
-                      {/* Outer glowing ring */}
-                      <span className="absolute -inset-1 bg-[#FF8835] rounded-lg opacity-40 blur-sm animate-pulse"></span>
-                      {/* Pulsing border */}
-                      <span className="absolute inset-0 border-2 border-[#FF8835] rounded-lg animate-ping opacity-75"></span>
+                      {/* Outer glowing ring - contained within bounds */}
+                      <span className="absolute inset-0 bg-[#FF8835] rounded-lg opacity-30 blur-[2px] animate-pulse"></span>
                       {/* Shimmer effect */}
                       <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-lg animate-[shimmer_2s_infinite]"></span>
                       {/* Scale animation for extra emphasis */}
                       <span className="absolute inset-0 bg-[#FF8835] rounded-lg opacity-20 animate-[pulse_1.5s_ease-in-out_infinite]"></span>
                     </>
                   )}
-                  <span className="relative z-10">{item}</span>
+                  <span className="relative z-10">{item.label}</span>
                 </Link>
               );
             })}
