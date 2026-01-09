@@ -299,18 +299,18 @@ export default function AdmissionForm() {
   };
 
   return (
-    <div className="w-full flex justify-center p-5 max-md:p-3 max-sm:p-2">
+    <div className="w-full flex justify-center p-5 max-md:p-3 max-sm:p-2 max-xs:p-1">
       {/* Main Form Container */}
-      <div className="relative w-[880px] min-h-[996px] bg-white border border-[#CCCCCC] drop-shadow-[0px_0px_8px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden max-[920px]:w-full max-[920px]:max-w-[880px] max-md:rounded-xl max-sm:rounded-lg">
+      <div className="relative w-[880px] min-h-[996px] bg-white border border-[#CCCCCC] drop-shadow-[0px_0px_8px_rgba(0,0,0,0.25)] rounded-2xl overflow-hidden max-[920px]:w-full max-[920px]:max-w-[880px] max-md:rounded-xl max-sm:rounded-lg max-sm:min-h-auto">
         {/* Header Section */}
-        <div className="relative w-full h-[100px] min-h-[100px] bg-gradient-to-br from-[#0A418F] to-[#072C5F] rounded-t-2xl flex items-center justify-between px-4 overflow-hidden max-[920px]:flex-col max-[920px]:h-auto max-[920px]:min-h-auto max-[920px]:p-4 max-[920px]:gap-4 max-md:rounded-t-xl max-sm:rounded-t-lg max-sm:px-3 max-sm:py-4">
+        <div className="relative w-full h-[100px] min-h-[100px] bg-gradient-to-br from-[#0A418F] to-[#072C5F] rounded-t-2xl flex items-center justify-between px-4 overflow-hidden max-[920px]:flex-col max-[920px]:h-auto max-[920px]:min-h-auto max-[920px]:p-4 max-[920px]:gap-4 max-md:rounded-t-xl max-md:px-3 max-md:py-3 max-sm:rounded-t-lg max-sm:px-2 max-sm:py-2.5 max-sm:gap-3">
           {/* Background decorative elements */}
           <div className="absolute w-[315.14px] h-[297.14px] top-1/2 -translate-y-1/2 left-[-60px] opacity-[0.12] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] pointer-events-none max-md:hidden before:content-[''] before:absolute before:w-[210.11px] before:h-[210.11px] before:bg-[#0A418F] before:rotate-[-45deg] before:left-[-42px] before:top-[-99px] after:content-[''] after:absolute after:w-[210.11px] after:h-[210.11px] after:bg-[#072C5F] after:rotate-[-45deg] after:left-[-60px] after:top-[-99px]"></div>
           <div className="absolute w-[315.14px] h-[297.14px] top-1/2 -translate-y-1/2 -scale-x-100 right-[-60px] opacity-[0.12] drop-shadow-[0px_4px_4px_rgba(0,0,0,0.25)] pointer-events-none max-md:hidden before:content-[''] before:absolute before:w-[210.11px] before:h-[210.11px] before:bg-[#0A418F] before:rotate-[-45deg] before:left-[-42px] before:top-[-99px] after:content-[''] after:absolute after:w-[210.11px] after:h-[210.11px] after:bg-[#072C5F] after:rotate-[-45deg] after:left-[-60px] after:top-[-99px]"></div>
           
           {/* Logo and Institute Name */}
-          <div className="flex flex-row items-center gap-3 z-10 max-md:gap-2 max-sm:flex-col max-sm:items-center max-sm:text-center">
-            <div className="w-12 h-12 rounded-[40px] overflow-hidden shrink-0 max-sm:w-10 max-sm:h-10">
+          <div className="flex flex-row items-center gap-3 z-10 max-md:gap-2 max-sm:flex-col max-sm:items-center max-sm:text-center max-sm:gap-2">
+            <div className="w-12 h-12 rounded-[40px] overflow-hidden shrink-0 max-sm:w-10 max-sm:h-10 max-xs:w-8 max-xs:h-8">
               <Image
                 src="/images/logo/logo.jpg"
                 alt="AIFT Logo"
@@ -319,29 +319,29 @@ export default function AdmissionForm() {
                 className="rounded-full"
               />
             </div>
-            <div className="w-[124px] h-auto font-['Merriweather'] font-bold text-sm leading-5 text-white flex items-center max-md:text-xs max-sm:w-full max-sm:justify-center max-sm:text-center">
+            <div className="w-[124px] h-auto font-['Merriweather'] font-bold text-sm leading-5 text-white flex items-center max-md:text-xs max-sm:w-full max-sm:justify-center max-sm:text-center max-sm:text-[10px] max-sm:leading-4 max-xs:text-[9px]">
               Apparel Institute of Fashion & Technology
             </div>
           </div>
 
           {/* Admission Open Section */}
-          <div className="flex flex-col items-center gap-[1px] z-10 max-[920px]:order-[-1] max-md:gap-0.5">
-            <div className="w-auto max-w-[240px] h-auto font-['Outfit'] font-bold text-[28px] leading-10 text-[#27A239] text-center max-md:text-2xl max-md:leading-8 max-sm:text-xl max-sm:leading-7" style={{
+          <div className="flex flex-col items-center gap-[1px] z-10 max-[920px]:order-[-1] max-md:gap-0.5 max-sm:gap-0">
+            <div className="w-auto max-w-[240px] h-auto font-['Outfit'] font-bold text-[28px] leading-10 text-[#27A239] text-center max-md:text-2xl max-md:leading-8 max-sm:text-lg max-sm:leading-6 max-xs:text-base max-xs:leading-5" style={{
               animation: 'glow-pulse 2s ease-in-out infinite'
             }}>ADMISSION OPEN</div>
-            <div className="w-auto max-w-[240px] h-auto font-['Merriweather'] italic font-bold text-xl leading-7 text-center text-[#EE5E11] max-md:text-lg max-sm:text-base" style={{
+            <div className="w-auto max-w-[240px] h-auto font-['Merriweather'] italic font-bold text-xl leading-7 text-center text-[#EE5E11] max-md:text-lg max-sm:text-sm max-sm:leading-5 max-xs:text-xs max-xs:leading-4" style={{
               animation: 'glow-pulse-orange 2s ease-in-out infinite 0.5s'
             }}>Spring 2026</div>
           </div>
 
           {/* Scholarship Section */}
-          <div className="flex flex-col items-center z-10 max-md:items-center">
-            <div className="flex flex-row items-center gap-[17px] max-md:gap-3">
-              <span className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm">Upto</span>
-              <span className="w-auto h-auto font-['Outfit'] font-semibold text-2xl leading-8 text-[#EE5E11] max-md:text-xl">100%</span>
+          <div className="flex flex-col items-center z-10 max-md:items-center max-sm:gap-0.5">
+            <div className="flex flex-row items-center gap-[17px] max-md:gap-3 max-sm:gap-2">
+              <span className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm max-sm:text-xs max-xs:text-[10px]">Upto</span>
+              <span className="w-auto h-auto font-['Outfit'] font-semibold text-2xl leading-8 text-[#EE5E11] max-md:text-xl max-sm:text-lg max-xs:text-base">100%</span>
             </div>
-            <div className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm">SCHOLARSHIP</div>
-            <div className="w-auto h-auto font-['Outfit'] font-semibold text-sm leading-6 text-center text-[#D2AF3C] max-md:text-xs">+880XXX XXX</div>
+            <div className="w-auto h-auto font-['Outfit'] font-semibold text-base leading-5 text-white max-md:text-sm max-sm:text-xs max-xs:text-[10px]">SCHOLARSHIP</div>
+            <div className="w-auto h-auto font-['Outfit'] font-semibold text-sm leading-6 text-center text-[#D2AF3C] max-md:text-xs max-sm:text-[10px] max-xs:text-[9px]">+880XXX XXX</div>
           </div>
         </div>
 
@@ -372,24 +372,24 @@ export default function AdmissionForm() {
           </div>
         ) : (
           /* Form Content */
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="relative flex flex-col items-center gap-6 p-5 pt-8 max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="relative flex flex-col items-center gap-6 p-5 pt-8 max-md:pt-20 max-md:gap-5 max-md:p-4 max-sm:pt-16 max-sm:gap-4 max-sm:p-3 max-sm:pt-12 max-xs:gap-3 max-xs:p-2 max-xs:pt-10">
             {/* Form Title */}
-            <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3">
-              <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5">Online Admission Information Form</h1>
+            <div className="flex flex-col items-center gap-5 w-full max-w-[659px] max-md:gap-4 max-sm:gap-3 max-xs:gap-2">
+              <h1 className="w-full h-auto font-['Merriweather'] font-normal text-xl leading-7 text-center text-[#1E2021] max-md:text-lg max-md:leading-6 max-sm:text-base max-sm:leading-5 max-xs:text-sm max-xs:leading-4">Online Admission Information Form</h1>
               
               {/* Action Buttons */}
-              <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2">
-                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[203px] border-2 border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+              <div className="flex flex-row items-center gap-5 w-full max-[920px]:flex-col max-[920px]:w-full max-md:gap-3 max-sm:gap-2 max-xs:gap-1.5">
+                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[203px] border-2 border-[#116DEE] text-[#116DEE] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs max-sm:min-h-[50px] max-xs:min-h-[45px] max-xs:text-[10px] max-xs:py-1 max-xs:px-4">
                   <span className="block leading-tight">Tuition Fee</span>
                   <span className="block leading-tight">Calculator</span>
                 </Button>
                 <Link href="/admission/tuition-fees" className="w-[183px] max-[920px]:w-full">
-                  <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-full border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                  <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-full border-2 border-[#27A239] text-[#27A239] hover:opacity-80 max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs max-sm:min-h-[50px] max-xs:min-h-[45px] max-xs:text-[10px] max-xs:py-1 max-xs:px-4">
                     <span className="block leading-tight">Check Tuition</span>
                     <span className="block leading-tight">Fees</span>
                   </Button>
                 </Link>
-                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs">
+                <Button variant="outline" type="button" className="box-border min-h-[60px] rounded-md font-['Outfit'] font-medium text-base leading-5 py-2 px-6 bg-white cursor-pointer transition-all flex flex-col items-center justify-center text-center w-[233px] border-2 border-[#EE5E11] text-[#EE5E11] hover:opacity-80 max-[920px]:w-full max-md:py-2 max-md:text-sm max-sm:py-1.5 max-sm:text-xs max-sm:min-h-[50px] max-xs:min-h-[45px] max-xs:text-[10px] max-xs:py-1 max-xs:px-4">
                   <span className="block leading-tight">Scholarship</span>
                   <span className="block leading-tight">Opportunities</span>
                 </Button>
@@ -418,12 +418,12 @@ export default function AdmissionForm() {
             )}
 
           {/* Basic Information Section */}
-          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3">
-            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">Basic Information</h2>
+          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3 max-xs:gap-2">
+            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6 max-xs:text-sm max-xs:leading-5">Basic Information</h2>
             
-            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4">
+            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4 max-xs:gap-3">
               {/* Row 1: Semester */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 flex-1">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Semester<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
@@ -442,7 +442,7 @@ export default function AdmissionForm() {
                             ref={(el) => {
                               formRefs.current['semester_id'] = el;
                             }}
-                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.semester_id || apiErrors.semester_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 max-xs:pr-8 ${errors.semester_id || apiErrors.semester_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                           >
                             <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
                           </SelectTrigger>
@@ -466,7 +466,7 @@ export default function AdmissionForm() {
               </div>
 
               {/* Row 2: Department & Program */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 flex-1">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Department<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
@@ -485,7 +485,7 @@ export default function AdmissionForm() {
                             ref={(el) => {
                               formRefs.current['department_id'] = el;
                             }}
-                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.department_id || apiErrors.department_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 max-xs:pr-8 ${errors.department_id || apiErrors.department_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                           >
                             <SelectValue placeholder={isLoadingDropdowns ? "Loading..." : "Select option"} />
                           </SelectTrigger>
@@ -525,7 +525,7 @@ export default function AdmissionForm() {
                             ref={(el) => {
                               formRefs.current['program_id'] = el;
                             }}
-                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.program_id || apiErrors.program_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 max-xs:pr-8 ${errors.program_id || apiErrors.program_id ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                           >
                             <SelectValue placeholder={!departmentId ? "Select department first" : "Select option"} />
                           </SelectTrigger>
@@ -549,7 +549,7 @@ export default function AdmissionForm() {
               </div>
 
               {/* Row 3: Full Name & Phone Number */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 flex-1">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Full Name<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
@@ -558,7 +558,7 @@ export default function AdmissionForm() {
                     type="text"
                     {...registerWithRef('full_name')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.full_name || apiErrors.full_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.full_name || apiErrors.full_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.full_name || apiErrors.full_name) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -575,7 +575,7 @@ export default function AdmissionForm() {
                     type="tel"
                     {...registerWithRef('phone_number')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.phone_number || apiErrors.phone_number ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.phone_number || apiErrors.phone_number ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.phone_number || apiErrors.phone_number) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -586,7 +586,7 @@ export default function AdmissionForm() {
               </div>
 
               {/* Row 4: Email & How did you hear about us */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 flex-1">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Email<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
@@ -595,7 +595,7 @@ export default function AdmissionForm() {
                     type="email"
                     {...registerWithRef('email')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.email || apiErrors.email ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.email || apiErrors.email ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.email || apiErrors.email) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -621,7 +621,7 @@ export default function AdmissionForm() {
                             ref={(el) => {
                               formRefs.current['hear_about_us'] = el;
                             }}
-                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] ${errors.hear_about_us || apiErrors.hear_about_us ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                            className={`box-border w-full h-11 py-3 px-4 pr-10 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 max-xs:pr-8 ${errors.hear_about_us || apiErrors.hear_about_us ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                           >
                             <SelectValue placeholder="Select option" />
                           </SelectTrigger>
@@ -645,7 +645,7 @@ export default function AdmissionForm() {
               </div>
 
               {/* Row 5: Father Name & Mother Name */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 flex-1">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Father Name
@@ -654,7 +654,7 @@ export default function AdmissionForm() {
                     type="text"
                     {...registerWithRef('father_name')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.father_name || apiErrors.father_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.father_name || apiErrors.father_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.father_name || apiErrors.father_name) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -671,7 +671,7 @@ export default function AdmissionForm() {
                     type="text"
                     {...registerWithRef('mother_name')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.mother_name || apiErrors.mother_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.mother_name || apiErrors.mother_name ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.mother_name || apiErrors.mother_name) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -682,7 +682,7 @@ export default function AdmissionForm() {
               </div>
 
               {/* Row 6: Who assisted you */}
-              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3">
+              <div className="flex flex-row items-center gap-6 w-full max-[920px]:flex-col max-[920px]:gap-4 max-sm:gap-3 max-xs:gap-2">
                 <div className="flex flex-col items-start gap-2 w-full">
                   <Label className="flex flex-row items-center font-['Outfit'] font-normal text-base leading-5 text-[#4A5568]">
                     Who assisted you for your admission?
@@ -691,7 +691,7 @@ export default function AdmissionForm() {
                     type="text"
                     {...registerWithRef('assisted_by')}
                     placeholder="Write here"
-                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.assisted_by || apiErrors.assisted_by ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                    className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.assisted_by || apiErrors.assisted_by ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                   />
                   {(errors.assisted_by || apiErrors.assisted_by) && (
                     <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -704,14 +704,14 @@ export default function AdmissionForm() {
           </div>
 
           {/* Academic Result Information Section */}
-          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3">
-            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6">Academic Result Information</h2>
+          <div className="flex flex-col items-start gap-5 w-full max-md:gap-4 max-sm:gap-3 max-xs:gap-2">
+            <h2 className="w-full h-auto font-['Outfit'] font-normal text-xl leading-8 text-[#4A5568] flex items-center max-md:text-lg max-md:leading-7 max-sm:text-base max-sm:leading-6 max-xs:text-sm max-xs:leading-5">Academic Result Information</h2>
             
-            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4">
+            <div className="flex flex-col items-start gap-6 w-full max-md:gap-5 max-sm:gap-4 max-xs:gap-3">
               {/* SSC Section */}
               <div className="w-full">
-                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4">SSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span></h3>
-                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1">
+                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4 max-sm:text-sm max-sm:leading-5 max-sm:mb-3 max-xs:text-xs max-xs:leading-4 max-xs:mb-2">SSC/Equivalent<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5 max-sm:w-[7px] max-sm:h-[15px] max-sm:text-sm max-xs:w-[6px] max-xs:h-[12px] max-xs:text-xs">*</span></h3>
+                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1 max-sm:gap-3 max-xs:gap-2">
                   <div className="flex flex-col items-start gap-2">
                     <Label className="flex flex-row items-center font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">
                       Roll Number<span className="w-[9px] h-[19px] font-['Inter'] font-medium text-base leading-[19px] text-[#FE6675] ml-0.5">*</span>
@@ -720,7 +720,7 @@ export default function AdmissionForm() {
                       type="text"
                       {...registerWithRef('ssc_roll')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_roll || apiErrors.ssc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.ssc_roll || apiErrors.ssc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.ssc_roll || apiErrors.ssc_roll) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -736,7 +736,7 @@ export default function AdmissionForm() {
                       type="text"
                       {...registerWithRef('ssc_registration_no')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_registration_no || apiErrors.ssc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.ssc_registration_no || apiErrors.ssc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.ssc_registration_no || apiErrors.ssc_registration_no) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -755,7 +755,7 @@ export default function AdmissionForm() {
                       step="0.01"
                       min="0"
                       max="5"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_gpa || apiErrors.ssc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.ssc_gpa || apiErrors.ssc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.ssc_gpa || apiErrors.ssc_gpa) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -769,7 +769,7 @@ export default function AdmissionForm() {
                       type="text"
                       {...registerWithRef('ssc_board')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_board || apiErrors.ssc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.ssc_board || apiErrors.ssc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.ssc_board || apiErrors.ssc_board) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -785,7 +785,7 @@ export default function AdmissionForm() {
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.ssc_passing_year || apiErrors.ssc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.ssc_passing_year || apiErrors.ssc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.ssc_passing_year || apiErrors.ssc_passing_year) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -798,15 +798,15 @@ export default function AdmissionForm() {
 
               {/* HSC Section */}
               <div className="w-full">
-                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4">HSC/Equivalent</h3>
-                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1">
+                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4 max-sm:text-sm max-sm:leading-5 max-sm:mb-3 max-xs:text-xs max-xs:leading-4 max-xs:mb-2">HSC/Equivalent</h3>
+                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1 max-sm:gap-3 max-xs:gap-2">
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">Roll Number</Label>
                     <Input
                       type="text"
                       {...registerWithRef('hsc_roll')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_roll || apiErrors.hsc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.hsc_roll || apiErrors.hsc_roll ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.hsc_roll || apiErrors.hsc_roll) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -820,7 +820,7 @@ export default function AdmissionForm() {
                       type="text"
                       {...registerWithRef('hsc_registration_no')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_registration_no || apiErrors.hsc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.hsc_registration_no || apiErrors.hsc_registration_no ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.hsc_registration_no || apiErrors.hsc_registration_no) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -837,7 +837,7 @@ export default function AdmissionForm() {
                       step="0.01"
                       min="0"
                       max="5"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_gpa || apiErrors.hsc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.hsc_gpa || apiErrors.hsc_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.hsc_gpa || apiErrors.hsc_gpa) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -851,7 +851,7 @@ export default function AdmissionForm() {
                       type="text"
                       {...registerWithRef('hsc_board')}
                       placeholder="Write here"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_board || apiErrors.hsc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.hsc_board || apiErrors.hsc_board ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.hsc_board || apiErrors.hsc_board) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -867,7 +867,7 @@ export default function AdmissionForm() {
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.hsc_passing_year || apiErrors.hsc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.hsc_passing_year || apiErrors.hsc_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.hsc_passing_year || apiErrors.hsc_passing_year) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -880,8 +880,8 @@ export default function AdmissionForm() {
 
               {/* Honors Section */}
               <div className="w-full">
-                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4">Honors/Equivalent/Other</h3>
-                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1">
+                <h3 className="font-['Outfit'] font-semibold text-base leading-6 text-[#4A5568] mb-4 max-sm:text-sm max-sm:leading-5 max-sm:mb-3 max-xs:text-xs max-xs:leading-4 max-xs:mb-2">Honors/Equivalent/Other</h3>
+                <div className="grid grid-cols-2 gap-4 max-[920px]:grid-cols-1 max-sm:gap-3 max-xs:gap-2">
                   <div className="flex flex-col items-start gap-2">
                     <Label className="font-['Outfit'] font-normal text-sm leading-5 text-[#4A5568]">CGPA</Label>
                     <Input
@@ -891,7 +891,7 @@ export default function AdmissionForm() {
                       step="0.01"
                       min="0"
                       max="4"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_gpa || apiErrors.honors_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.honors_gpa || apiErrors.honors_gpa ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.honors_gpa || apiErrors.honors_gpa) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -907,7 +907,7 @@ export default function AdmissionForm() {
                       placeholder="YYYY"
                       min="1900"
                       max="2100"
-                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] ${errors.honors_passing_year || apiErrors.honors_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
+                      className={`box-border w-full h-11 py-3 px-4 border rounded font-['Roboto'] font-normal text-sm leading-5 text-[#1E2021] bg-white focus:border-[#116DEE] placeholder:text-[#ADB3BD] max-sm:h-10 max-sm:text-xs max-xs:h-9 max-xs:py-2 max-xs:px-3 ${errors.honors_passing_year || apiErrors.honors_passing_year ? 'border-red-500' : 'border-[#E5E7EB]'}`}
                     />
                     {(errors.honors_passing_year || apiErrors.honors_passing_year) && (
                       <p className="text-red-500 text-xs mt-1 font-['Outfit']">
@@ -935,11 +935,11 @@ export default function AdmissionForm() {
           </div>
 
           {/* Submit Button */}
-          <div className="flex flex-row justify-center items-center w-full mt-5 max-md:mt-4 max-sm:mt-3">
+          <div className="flex flex-row justify-center items-center w-full mt-5 max-md:mt-4 max-sm:mt-3 max-xs:mt-2">
             <Button 
               type="submit"
               disabled={isSubmitting || isLoadingDropdowns}
-              className="w-[258px] h-12 py-3 px-8 bg-gradient-to-r from-[#0056EC] to-[#01AD9F] rounded-lg border-none font-['Outfit'] font-medium text-xl leading-6 text-white cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed max-md:w-full max-md:max-w-[258px] max-md:text-lg max-sm:text-base max-sm:h-11 max-sm:py-2.5 max-sm:px-6"
+              className="w-[258px] h-12 py-3 px-8 bg-gradient-to-r from-[#0056EC] to-[#01AD9F] rounded-lg border-none font-['Outfit'] font-medium text-xl leading-6 text-white cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed max-md:w-full max-md:max-w-[258px] max-md:text-lg max-sm:text-base max-sm:h-11 max-sm:py-2.5 max-sm:px-6 max-xs:text-sm max-xs:h-10 max-xs:py-2 max-xs:px-4"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </Button>
